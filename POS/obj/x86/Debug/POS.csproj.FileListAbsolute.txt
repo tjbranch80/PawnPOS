@@ -1,0 +1,14 @@
+C:\Pawn_POS\POS\bin\Debug\POS.exe.config
+C:\Pawn_POS\POS\bin\Debug\POS.exe
+C:\Pawn_POS\POS\bin\Debug\POS.pdb
+C:\Pawn_POS\POS\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Pawn_POS\POS\obj\x86\Debug\POS.CreateNewCustomer.resources
+C:\Pawn_POS\POS\obj\x86\Debug\POS.MainMenu.resources
+C:\Pawn_POS\POS\obj\x86\Debug\POS.Properties.Resources.resources
+C:\Pawn_POS\POS\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Pawn_POS\POS\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Pawn_POS\POS\obj\x86\Debug\POS.exe
+C:\Pawn_POS\POS\obj\x86\Debug\POS.pdb
+C:\Pawn_POS\POS\obj\x86\Debug\POS.CustomerSearch.resources
+C:\Pawn_POS\POS\obj\x86\Debug\POS.Sales.resources
+C:\Pawn_POS\POS\obj\x86\Debug\POS.SalesInvoice.resources

@@ -1,0 +1,8 @@
+C:\Pawn_POS\POS\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Pawn_POS\POS\obj\x86\Release\POS.CreateNewCustomer.resources
+C:\Pawn_POS\POS\obj\x86\Release\POS.CustomerSearch.resources
+C:\Pawn_POS\POS\obj\x86\Release\POS.MainMenu.resources
+C:\Pawn_POS\POS\obj\x86\Release\POS.Properties.Resources.resources
+C:\Pawn_POS\POS\obj\x86\Release\POS.Sales.resources
+C:\Pawn_POS\POS\obj\x86\Release\GenerateResource.read.1.tlog
+C:\Pawn_POS\POS\obj\x86\Release\GenerateResource.write.1.tlog

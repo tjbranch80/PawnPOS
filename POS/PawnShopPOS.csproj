@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{39A4D4EE-F77C-4317-BC37-8E65E91157BC}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>POS</RootNamespace>
+    <AssemblyName>PawnShopPOS</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <SourceAnalysisOverrideSettingsFile>C:\Documents and Settings\tbranch\Application Data\ICSharpCode/SharpDevelop4\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <ApplicationIcon>..\..\Documents and Settings\tbranch\My Documents\My Pictures\Icons\PawnShopIcons\Red-pawn-Symbol.ico</ApplicationIcon>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <RunCodeAnalysis>False</RunCodeAnalysis>
+    <RunSourceAnalysis>False</RunSourceAnalysis>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="RdlEngine">
+      <HintPath>..\..\Program Files\fyiReporting RDL Project 4.1\RdlEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="RdlViewer">
+      <HintPath>..\..\Program Files\fyiReporting RDL Project 4.1\RdlViewer.DLL</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SqlServerCe, Version=3.5.1.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddInventory.Designer.cs">
+      <DependentUpon>AddInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddPrimeCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddPrimeCategory.Designer.cs">
+      <DependentUpon>AddPrimeCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddProductStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddProductStatus.Designer.cs">
+      <DependentUpon>AddProductStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddSecondaryCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddSecondaryCategory.Designer.cs">
+      <DependentUpon>AddSecondaryCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeStatus.Designer.cs">
+      <DependentUpon>ChangeStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CreateLayaway.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateLayaway.Designer.cs">
+      <DependentUpon>CreateLayaway.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CreateNewCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateNewCustomer.Designer.cs">
+      <DependentUpon>CreateNewCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomerSearch.Designer.cs">
+      <DependentUpon>CustomerSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataManager.cs" />
+    <Compile Include="DataVerification.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DefaultPawnReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DefaultPawnReport.Designer.cs">
+      <DependentUpon>DefaultPawnReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainMenu.Designer.cs">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintenance.Designer.cs">
+      <DependentUpon>Maintenance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PawnItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PawnItem.Designer.cs">
+      <DependentUpon>PawnItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PawnPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PawnPayment.Designer.cs">
+      <DependentUpon>PawnPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PawnPaymentReceipt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PawnPaymentReceipt.Designer.cs">
+      <DependentUpon>PawnPaymentReceipt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PawnProcessing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PawnProcessing.Designer.cs">
+      <DependentUpon>PawnProcessing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PawnReceipt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PawnReceipt.Designer.cs">
+      <DependentUpon>PawnReceipt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PurchaseInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PurchaseInvoice.Designer.cs">
+      <DependentUpon>PurchaseInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PurchaseItem.Designer.cs">
+      <DependentUpon>PurchaseItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportDataManager.cs" />
+    <Compile Include="ReprintInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReprintInvoice.Designer.cs">
+      <DependentUpon>ReprintInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales.Designer.cs">
+      <DependentUpon>Sales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesInvoice.Designer.cs">
+      <DependentUpon>SalesInvoice.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AddInventory.resx">
+      <DependentUpon>AddInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddPrimeCategory.resx">
+      <DependentUpon>AddPrimeCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddProductStatus.resx">
+      <DependentUpon>AddProductStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddSecondaryCategory.resx">
+      <DependentUpon>AddSecondaryCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeStatus.resx">
+      <DependentUpon>ChangeStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateLayaway.resx">
+      <DependentUpon>CreateLayaway.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateNewCustomer.resx">
+      <DependentUpon>CreateNewCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomerSearch.resx">
+      <DependentUpon>CustomerSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DefaultPawnReport.resx">
+      <DependentUpon>DefaultPawnReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainMenu.resx">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintenance.resx">
+      <DependentUpon>Maintenance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PawnItem.resx">
+      <DependentUpon>PawnItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PawnPayment.resx">
+      <DependentUpon>PawnPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PawnPaymentReceipt.resx">
+      <DependentUpon>PawnPaymentReceipt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PawnProcessing.resx">
+      <DependentUpon>PawnProcessing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PawnReceipt.resx">
+      <DependentUpon>PawnReceipt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="PurchaseInvoice.resx">
+      <DependentUpon>PurchaseInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PurchaseItem.resx">
+      <DependentUpon>PurchaseItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReprintInvoice.resx">
+      <DependentUpon>ReprintInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales.resx">
+      <DependentUpon>Sales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInvoice.resx">
+      <DependentUpon>SalesInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.SQL.Server.Compact.3.5">
+      <Visible>False</Visible>
+      <ProductName>SQL Server Compact 3.5 SP2</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
