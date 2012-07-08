@@ -33,6 +33,7 @@ namespace POS
         }
 
         DataTable customerInfoTable = new DataTable();
+        DataTable inventoryTable = new DataTable();
         string createPONumber;
 
         #endregion
@@ -45,6 +46,7 @@ namespace POS
             {
                 GetCustomerData();
                 CheckAccountStatus();
+                GetAllInventory();
                 createPONumber = "L" + CreatePONumber();
             }
             catch (Exception)
@@ -61,6 +63,17 @@ namespace POS
                 bindingSource.DataSource = customerInfoTable;
                 bindingSource.Filter = string.Format("LastName LIKE '%{0}%'", FilterTextBox.Text.Trim().Replace("'", "''"));
                 CustomerGridView.DataSource = bindingSource;
+            }
+        }
+
+        private void ProductFilterTextBox_TextChanged(object sender, EventArgs e)
+        {
+            BindingSource bindingSource = new BindingSource();
+            if (ProductFilterTextBox.TextLength > 0)
+            {
+                bindingSource.DataSource = inventoryTable;
+                bindingSource.Filter = string.Format("ProductDescription LIKE '%{0}%'", ProductFilterTextBox.Text.Trim().Replace("'", "''"));
+                InventoryGridView.DataSource = bindingSource;
             }
         }
 
@@ -86,6 +99,18 @@ namespace POS
         private void RemoveCustomerButton_Click(object sender, EventArgs e)
         {
             CustomerIDTextBox.Text = string.Empty;
+        }
+
+        private void AddProductButton_Click(object sender, EventArgs e)
+        {
+            string selectedProductID = GetSelectedProductID();
+            ProductsGridView.Rows.Add(selectedProductID);
+        }
+
+        private void RemoveProductButton_Click(object sender, EventArgs e)
+        {
+            var selectedRow = ProductsGridView.SelectedRows;
+            ProductsGridView.Rows.Remove(selectedRow[0]);
         }
 
         private void CloseLayawayButton_Click(object sender, EventArgs e)
@@ -144,7 +169,24 @@ namespace POS
             return selectedCustomerRow;
         }
 
+        public void GetAllInventory()
+        {
+            DataManager dataManager = new DataManager(connectionString);
+            inventoryTable = dataManager.GetAllInventory();
+            InventoryGridView.DataSource = inventoryTable;
+        }
+
+        public string GetSelectedProductID()
+        {
+            string selectedProductRow = Convert.ToString(InventoryGridView.SelectedRows[0].Cells[0].Value);
+            return selectedProductRow;
+        }
+
         #endregion
+
+        
+
+        
 
         
 

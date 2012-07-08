@@ -204,4 +204,10 @@
         Jw3SaArUgazR+HunSDMNbl1Bfg1A2NJurgh4Wab9+/f/BzVyHfTXtywLAAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="ProductID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="SalePrice.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

@@ -40,8 +40,14 @@
             this.InventoryGridView = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.ProductFilterTextBox = new System.Windows.Forms.TextBox();
+            this.AddProductButton = new System.Windows.Forms.Button();
+            this.RemoveProductButton = new System.Windows.Forms.Button();
+            this.ProductsGridView = new System.Windows.Forms.DataGridView();
+            this.ProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SalePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.CustomerGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.InventoryGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ProductsGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // CustomerGridView
@@ -102,7 +108,7 @@
             // 
             this.CloseLayawayButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("CloseLayawayButton.BackgroundImage")));
             this.CloseLayawayButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.CloseLayawayButton.Location = new System.Drawing.Point(551, 487);
+            this.CloseLayawayButton.Location = new System.Drawing.Point(553, 556);
             this.CloseLayawayButton.Name = "CloseLayawayButton";
             this.CloseLayawayButton.Size = new System.Drawing.Size(48, 48);
             this.CloseLayawayButton.TabIndex = 6;
@@ -143,13 +149,59 @@
             this.ProductFilterTextBox.Name = "ProductFilterTextBox";
             this.ProductFilterTextBox.Size = new System.Drawing.Size(210, 20);
             this.ProductFilterTextBox.TabIndex = 10;
+            this.ProductFilterTextBox.TextChanged += new System.EventHandler(this.ProductFilterTextBox_TextChanged);
+            // 
+            // AddProductButton
+            // 
+            this.AddProductButton.Location = new System.Drawing.Point(15, 372);
+            this.AddProductButton.Name = "AddProductButton";
+            this.AddProductButton.Size = new System.Drawing.Size(56, 23);
+            this.AddProductButton.TabIndex = 11;
+            this.AddProductButton.Text = "Add";
+            this.AddProductButton.UseVisualStyleBackColor = true;
+            this.AddProductButton.Click += new System.EventHandler(this.AddProductButton_Click);
+            // 
+            // RemoveProductButton
+            // 
+            this.RemoveProductButton.Location = new System.Drawing.Point(115, 372);
+            this.RemoveProductButton.Name = "RemoveProductButton";
+            this.RemoveProductButton.Size = new System.Drawing.Size(56, 23);
+            this.RemoveProductButton.TabIndex = 12;
+            this.RemoveProductButton.Text = "Remove";
+            this.RemoveProductButton.UseVisualStyleBackColor = true;
+            this.RemoveProductButton.Click += new System.EventHandler(this.RemoveProductButton_Click);
+            // 
+            // ProductsGridView
+            // 
+            this.ProductsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ProductsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ProductID,
+            this.SalePrice});
+            this.ProductsGridView.Location = new System.Drawing.Point(15, 416);
+            this.ProductsGridView.Name = "ProductsGridView";
+            this.ProductsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.ProductsGridView.Size = new System.Drawing.Size(235, 150);
+            this.ProductsGridView.TabIndex = 13;
+            // 
+            // ProductID
+            // 
+            this.ProductID.HeaderText = "ProductID";
+            this.ProductID.Name = "ProductID";
+            // 
+            // SalePrice
+            // 
+            this.SalePrice.HeaderText = "SalePrice";
+            this.SalePrice.Name = "SalePrice";
             // 
             // CreateLayaway
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(613, 547);
+            this.ClientSize = new System.Drawing.Size(613, 616);
             this.ControlBox = false;
+            this.Controls.Add(this.ProductsGridView);
+            this.Controls.Add(this.RemoveProductButton);
+            this.Controls.Add(this.AddProductButton);
             this.Controls.Add(this.ProductFilterTextBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.InventoryGridView);
@@ -166,6 +218,7 @@
             this.Load += new System.EventHandler(this.CreateLayaway_Load);
             ((System.ComponentModel.ISupportInitialize)(this.CustomerGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.InventoryGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ProductsGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -184,5 +237,10 @@
         private System.Windows.Forms.DataGridView InventoryGridView;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox ProductFilterTextBox;
+        private System.Windows.Forms.Button AddProductButton;
+        private System.Windows.Forms.Button RemoveProductButton;
+        private System.Windows.Forms.DataGridView ProductsGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SalePrice;
     }
 }

@@ -129,25 +129,6 @@ namespace POS
             }
         }
 
-        public DataTable GetAllInventory()
-        {
-            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
-            {
-                string allInventoryQuery = @"SELECT * 
-                                             FROM Inventory i
-                                             WHERE i.ProductStatus = 'Available'";
-                connection.Open();
-
-                using (SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(allInventoryQuery, connection))
-                {
-                    DataTable allInventoryTable = new DataTable();
-                    dataAdapter.Fill(allInventoryTable);
-                    connection.Close();
-                    return allInventoryTable;
-                }
-            }
-        }
-
         #endregion
 
         #region Program Maintenance
@@ -369,6 +350,25 @@ namespace POS
         #endregion
 
         #region Multi Use Queries
+
+        public DataTable GetAllInventory()
+        {
+            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
+            {
+                string allInventoryQuery = @"SELECT * 
+                                             FROM Inventory i
+                                             WHERE i.ProductStatus = 'Available'";
+                connection.Open();
+
+                using (SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(allInventoryQuery, connection))
+                {
+                    DataTable allInventoryTable = new DataTable();
+                    dataAdapter.Fill(allInventoryTable);
+                    connection.Close();
+                    return allInventoryTable;
+                }
+            }
+        }
 
         public DataTable GetCustomerInformation()
         {
