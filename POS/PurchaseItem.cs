@@ -103,7 +103,19 @@ namespace POS
 		
 		private void AddNewItemButtonClick(object sender, EventArgs e)
 		{
-			AddNewPurchaseItem();
+            bool checkTextBoxes = CheckDataInput();
+
+            if (!checkTextBoxes)
+            {
+                try
+                {
+                    AddNewPurchaseItem();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(string.Format("Error: {0}", ex));
+                }
+            }
 		}
 		
 		private void SavePurchaseButtonClick(object sender, EventArgs e)
@@ -179,13 +191,21 @@ namespace POS
 		
 		public string GetSelectedPrimeCategory()
 		{
-			string selectedPrimeCat = Convert.ToString(PrimeCatGridView.SelectedRows[0].Cells[0].Value);
+            string selectedPrimeCat = "";
+            if (PrimeCatGridView.SelectedRows.Count > 0)
+            {
+                selectedPrimeCat = Convert.ToString(PrimeCatGridView.SelectedRows[0].Cells[0].Value);
+            }
 			return selectedPrimeCat;
 		}
 		
 		public string GetSelectedSecCategory()
 		{
-			string selectedSecCat = Convert.ToString(SecCatGridView.SelectedRows[0].Cells[0].Value);
+            string selectedSecCat = "";
+            if (SecCatGridView.SelectedRows.Count > 0)
+            {
+                selectedSecCat = Convert.ToString(SecCatGridView.SelectedRows[0].Cells[0].Value);
+            }
 			return selectedSecCat;
 		}
 		
@@ -276,19 +296,29 @@ namespace POS
         public bool CheckDataInput()
         {
             DataVerification dataCheck = new DataVerification();
+            string primeCategory = GetSelectedPrimeCategory();
+            string secondaryCategory = GetSelectedSecCategory();
+            bool result = false;
 
-            var checkCustomerNum = dataCheck.IsEmpty(CustomerIDTextBox, CustomerIDTextBox.Text, ErrorProvider);
-            var checkProductId = dataCheck.IsEmpty(ProductIDTextBox, ProductIDTextBox.Text, ErrorProvider);
-            var checkProductDesc = dataCheck.IsEmpty(ProductDescTextBox, ProductDescTextBox.Text, ErrorProvider);
-            var checkPrice = dataCheck.IsEmpty(PriceTextBox, PriceTextBox.Text, ErrorProvider);
-            var checkSerialNum = dataCheck.IsEmpty(SerialNumberTextBox, SerialNumberTextBox.Text, ErrorProvider);
-           
-            if (!checkCustomerNum || !checkProductId || !checkProductDesc || !checkPrice || !checkSerialNum)
+            bool checkCustomerNum = dataCheck.IsEmpty(CustomerIDTextBox, CustomerIDTextBox.Text, ErrorProvider);
+            bool checkProductId = dataCheck.IsEmpty(ProductIDTextBox, ProductIDTextBox.Text, ErrorProvider);
+            bool checkProductDesc = dataCheck.IsEmpty(ProductDescTextBox, ProductDescTextBox.Text, ErrorProvider);
+            bool checkPrice = dataCheck.IsEmpty(PriceTextBox, PriceTextBox.Text, ErrorProvider);
+            bool checkSerialNum = dataCheck.IsEmpty(SerialNumberTextBox, SerialNumberTextBox.Text, ErrorProvider);
+            bool checkPrimeCat = dataCheck.IsEmpty(PrimeCatGridView, primeCategory, ErrorProvider);
+            bool checkSecCat = dataCheck.IsEmpty(SecCatGridView, secondaryCategory, ErrorProvider);
+
+            if (checkCustomerNum || checkProductId || checkProductDesc || checkPrice ||
+                checkSerialNum || checkPrimeCat || checkSecCat)
+            {
+                result = true;
+            }
+            else
             {
                 ErrorProvider.Clear();
                 return false;
             }
-            return true;
+            return result;
         }
 		
 		#endregion

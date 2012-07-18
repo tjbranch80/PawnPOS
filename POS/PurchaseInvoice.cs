@@ -178,7 +178,7 @@ namespace POS
         
         public void SaveInvoiceToFile()
         {
-        	var invoicePath = ConfigurationManager.AppSettings["PurchasePath"];
+        	var invoicePath = ConfigurationManager.AppSettings["InvoicePath"];
         	string invoiceNumber = poNumber;
             string savePath = invoicePath + invoiceNumber + ".jpg";
             Bitmap invoiceImage = CreateInvoiceImage();
