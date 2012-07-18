@@ -69,6 +69,7 @@ namespace POS
         public bool CheckDataInput()
         {
             DataVerification dataCheck = new DataVerification();
+            bool result = false;
             
             var checkLicenseNum = dataCheck.IsEmpty(LicenseNumTextBox, LicenseNumTextBox.Text, ErrorProvider);
             var checkFirstName = dataCheck.IsEmpty(FirstNameTextBox, FirstNameTextBox.Text, ErrorProvider);
@@ -81,13 +82,17 @@ namespace POS
             var checkPhone = dataCheck.IsEmpty(PhoneNumTextBox, PhoneNumTextBox.Text, ErrorProvider);
             var checkSecondPhone = dataCheck.IsEmpty(SecondaryPhoneTextBox, SecondaryPhoneTextBox.Text, ErrorProvider);
 
-            if (!checkLicenseNum || !checkFirstName || !checkLastName || !checkMiddleName || !checkAddress ||
-                !checkCity || !checkState || !checkZip || !checkPhone || !checkSecondPhone)
+            if (checkLicenseNum || checkFirstName || checkLastName || checkMiddleName || checkAddress ||
+                checkCity || checkState || checkZip || checkPhone || checkSecondPhone)
+            {
+                result = true;
+            }
+            else
             {
                 ErrorProvider.Clear();
-                return false;
+                result = false;
             }
-            return true;
+            return result;
         }
 
         public void SaveNewCustomer()

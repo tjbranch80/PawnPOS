@@ -88,31 +88,20 @@ namespace POS
 		
 		public string GetSelectedPrimeCategory()
 		{
-            string selectedPrimeCat = string.Empty;
-
-            try
+            string selectedPrimeCat = "";
+            if (PrimeCatGridView.SelectedRows.Count > 0)
             {
                 selectedPrimeCat = Convert.ToString(PrimeCatGridView.SelectedRows[0].Cells[0].Value);
-                
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Please select a Primary Category");
             }
             return selectedPrimeCat;
 		}
 		
 		public string GetSelectedSecCategory()
 		{
-            string selectedSecCat = string.Empty;
-
-            try
+            string selectedSecCat = "";
+            if (SecCatGridView.SelectedRows.Count > 0)
             {
                 selectedSecCat = Convert.ToString(SecCatGridView.SelectedRows[0].Cells[0].Value);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Please select a Secondary Category");
             }
 			return selectedSecCat;
 		}
@@ -152,21 +141,28 @@ namespace POS
             DataVerification dataCheck = new DataVerification();
             string primeCategory = GetSelectedPrimeCategory();
             string secondaryCategory = GetSelectedSecCategory();
+            bool result = false;
             
-            var checkProductId = dataCheck.IsEmpty(ProductIDTextBox, ProductIDTextBox.Text, ErrorProvider);
-            var checkProductDesc = dataCheck.IsEmpty(ProductDescTextBox, ProductDescTextBox.Text, ErrorProvider);
-            var checkPrice = dataCheck.IsEmpty(PriceTextBox, PriceTextBox.Text, ErrorProvider);
-            var checkSerialNum = dataCheck.IsEmpty(SerialNumTextBox, SerialNumTextBox.Text, ErrorProvider);
+            bool checkProductId = dataCheck.IsEmpty(ProductIDTextBox, ProductIDTextBox.Text, ErrorProvider);
+            bool checkProductDesc = dataCheck.IsEmpty(ProductDescTextBox, ProductDescTextBox.Text, ErrorProvider);
+            bool checkPrice = dataCheck.IsEmpty(PriceTextBox, PriceTextBox.Text, ErrorProvider);
+            bool checkSerialNum = dataCheck.IsEmpty(SerialNumTextBox, SerialNumTextBox.Text, ErrorProvider);
+            bool checkPrimeCat = dataCheck.IsEmpty(PrimeCatGridView, primeCategory, ErrorProvider);
+            bool checkSecCat = dataCheck.IsEmpty(SecCatGridView, secondaryCategory, ErrorProvider);
 
-            if (!checkProductId || !checkProductDesc || !checkPrice || !checkSerialNum ||
-                primeCategory != string.Empty || secondaryCategory != string.Empty)
+            if (checkProductId || checkProductDesc || checkPrice || checkSerialNum || checkPrimeCat
+                || checkSecCat)
+            {
+                result = true;
+            }
+            else
             {
                 ErrorProvider.Clear();
-                return false;
+                result = false;
             }
-            return true;
+            return result;
         }
-		
+
 		#endregion
 	}
 }

@@ -10,7 +10,6 @@ namespace POS
 	{
 		public Maintenance()
 		{
-			
 			InitializeComponent();
 			CenterToScreen();
 		}

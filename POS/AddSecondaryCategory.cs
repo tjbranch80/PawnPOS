@@ -97,12 +97,6 @@ namespace POS
 			}
 		}
 		
-		#endregion
-		
-		
-		
-		
-		
-		
+		#endregion	
 	}
 }

@@ -32,7 +32,7 @@ namespace POS
                 connection.Open();
 
                 string customerSaveQuery = @"INSERT INTO Customers(CustomerID,FirstName,LastName,Middle,Address,City,State,
-                ZipCode,PhoneNum,SecondaryPhoneNum,LicenseNum,EntryDate)VALUES(@customerID,@firstName,@lastName,@middle,
+                ZipCode,PhoneNum,SecondaryPhoneNum,LicenseNum,EntryDate,AccountStatus)VALUES(@customerID,@firstName,@lastName,@middle,
                 @address,@city,@state,@zipCode,@phoneNumber,@secondPhoneNumber,@licenseNumber,@entryDate,@accountStatus)";
 
                 using (SqlCeCommand command = new SqlCeCommand(customerSaveQuery, connection))

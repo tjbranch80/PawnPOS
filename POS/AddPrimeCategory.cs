@@ -75,11 +75,6 @@ namespace POS
 			}
 		}
 		
-		
-		
-		
-		
-		
 		#endregion
 	}
 }

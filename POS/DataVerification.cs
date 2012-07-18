@@ -8,21 +8,25 @@ namespace POS
 {
     class DataVerification : System.Windows.Forms.UserControl
     {
-
         #region Public Methods
 
         public bool IsEmpty(Control control, string text, ErrorProvider errorProvider)
         {
             string errorMessage = "";
-            
-            if (string.IsNullOrEmpty(text))
+            bool result = true;
+
+            if (text == "")
             {
                 errorMessage = "This is a required field";
                 errorProvider.SetError(control, errorMessage);
-                return true;
+            }
+            else
+            {
+                errorProvider.SetError(control, "");
+                result = false;
             }
            
-            return false;
+            return result;
         }
 
         #endregion
