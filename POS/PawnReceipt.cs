@@ -109,7 +109,7 @@ namespace POS
 
         public void SaveInvoiceToFile()
         {
-            var pawnReceiptPath = ConfigurationManager.AppSettings["PawnReceiptPath"];
+            var pawnReceiptPath = ConfigurationManager.AppSettings["InvoicePath"];
             string transactionID = transactionNumber;
             string savePath = pawnReceiptPath + transactionID + ".jpg";
             Bitmap invoiceImage = CreateInvoiceImage();

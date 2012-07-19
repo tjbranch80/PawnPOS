@@ -115,6 +115,7 @@ namespace POS
                 {
                     CreatePawn();
                     CreatePawnReceipt();
+                    ResetForm();
                 }
                 catch (Exception ex)
                 {
@@ -158,13 +159,21 @@ namespace POS
 		
 		public string GetAccountStatus()
         {
-        	string selectedCustomerStatus = Convert.ToString(CustomerGridView.SelectedRows[0].Cells[12].Value);
+            string selectedCustomerStatus = "";
+            if (CustomerGridView.SelectedRows.Count > 0)
+            {
+                selectedCustomerStatus = Convert.ToString(CustomerGridView.SelectedRows[0].Cells[12].Value);
+            }
         	return selectedCustomerStatus;
         }
 		
 		public string GetSelectedCustomerID()
         {
-            string selectedCustomerRow = Convert.ToString(CustomerGridView.SelectedRows[0].Cells[0].Value);
+            string selectedCustomerRow = "";
+            if (CustomerGridView.SelectedRows.Count > 0)
+            {
+                selectedCustomerRow = Convert.ToString(CustomerGridView.SelectedRows[0].Cells[0].Value);
+            }
             return selectedCustomerRow;
         }
 		
@@ -227,17 +236,22 @@ namespace POS
         public bool CheckDataInput()
         {
             DataVerification dataCheck = new DataVerification();
+            bool result = false;
 
-            var checkCustomerNum = dataCheck.IsEmpty(CustomerIDTextBox, CustomerIDTextBox.Text, ErrorProvider);
-            var checkProductDesc = dataCheck.IsEmpty(ProductDescTextBox, ProductDescTextBox.Text, ErrorProvider);
-            var checkPrice = dataCheck.IsEmpty(PrincipalTextBox, PrincipalTextBox.Text, ErrorProvider);
+            bool checkCustomerNum = dataCheck.IsEmpty(CustomerIDTextBox, CustomerIDTextBox.Text, ErrorProvider);
+            bool checkProductDesc = dataCheck.IsEmpty(ProductDescTextBox, ProductDescTextBox.Text, ErrorProvider);
+            bool checkPrice = dataCheck.IsEmpty(PrincipalTextBox, PrincipalTextBox.Text, ErrorProvider);
 
-            if (!checkCustomerNum || !checkProductDesc || !checkPrice)
+            if (checkCustomerNum || checkProductDesc || checkPrice)
+            {
+                result = true;
+            }
+            else
             {
                 ErrorProvider.Clear();
-                return false;
+                result = false;
             }
-            return true;
+            return result;
         }
 		
 		public void ResetForm()

@@ -123,7 +123,11 @@ namespace POS
 
         public string GetTransactionID()
         {
-            string selectedPawnRow = Convert.ToString(PawnDataGrid.SelectedRows[0].Cells[0].Value);
+            string selectedPawnRow = "";
+            if (PawnDataGrid.SelectedRows.Count > 0)
+            {
+                selectedPawnRow = Convert.ToString(PawnDataGrid.SelectedRows[0].Cells[0].Value);
+            }
             return selectedPawnRow;
         }
 
@@ -235,7 +239,11 @@ namespace POS
 
         public string GetCustomerID()
         {
-            string selectedCustomerRow = Convert.ToString(PawnDataGrid.SelectedRows[0].Cells[1].Value);
+            string selectedCustomerRow = "";
+            if (PawnDataGrid.SelectedRows.Count > 0)
+            {
+                selectedCustomerRow = Convert.ToString(PawnDataGrid.SelectedRows[0].Cells[1].Value);
+            }
             return selectedCustomerRow;
         }
 

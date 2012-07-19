@@ -157,9 +157,9 @@
             // 
             // PaymentDateLabel
             // 
-            this.PaymentDateLabel.Location = new System.Drawing.Point(106, 133);
+            this.PaymentDateLabel.Location = new System.Drawing.Point(106, 143);
             this.PaymentDateLabel.Name = "PaymentDateLabel";
-            this.PaymentDateLabel.Size = new System.Drawing.Size(166, 23);
+            this.PaymentDateLabel.Size = new System.Drawing.Size(166, 13);
             this.PaymentDateLabel.TabIndex = 61;
             this.PaymentDateLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
@@ -174,9 +174,9 @@
             // 
             // PaymentAmountLabel
             // 
-            this.PaymentAmountLabel.Location = new System.Drawing.Point(106, 183);
+            this.PaymentAmountLabel.Location = new System.Drawing.Point(106, 193);
             this.PaymentAmountLabel.Name = "PaymentAmountLabel";
-            this.PaymentAmountLabel.Size = new System.Drawing.Size(166, 23);
+            this.PaymentAmountLabel.Size = new System.Drawing.Size(166, 13);
             this.PaymentAmountLabel.TabIndex = 63;
             this.PaymentAmountLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
@@ -191,9 +191,9 @@
             // 
             // NewPrincipalLabel
             // 
-            this.NewPrincipalLabel.Location = new System.Drawing.Point(117, 238);
+            this.NewPrincipalLabel.Location = new System.Drawing.Point(117, 248);
             this.NewPrincipalLabel.Name = "NewPrincipalLabel";
-            this.NewPrincipalLabel.Size = new System.Drawing.Size(155, 23);
+            this.NewPrincipalLabel.Size = new System.Drawing.Size(155, 13);
             this.NewPrincipalLabel.TabIndex = 65;
             this.NewPrincipalLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 

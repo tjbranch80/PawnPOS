@@ -121,18 +121,16 @@ namespace POS
 		private void SavePurchaseButtonClick(object sender, EventArgs e)
 		{
             bool checkTextBoxes = CheckDataInput();
-
-            if (!checkTextBoxes)
+            
+            try
             {
-                try
-                {
-                    CreatePurchaseInvoice();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(string.Format("Error: {0}", ex));
-                }
+                CreatePurchaseInvoice();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("Error: {0}", ex));
+            }
+            
 		}
 		
 		#endregion

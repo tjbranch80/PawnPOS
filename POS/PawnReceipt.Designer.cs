@@ -148,23 +148,23 @@
             // 
             // ProductDescriptionLabel
             // 
-            this.ProductDescriptionLabel.Location = new System.Drawing.Point(143, 138);
+            this.ProductDescriptionLabel.Location = new System.Drawing.Point(143, 148);
             this.ProductDescriptionLabel.Name = "ProductDescriptionLabel";
-            this.ProductDescriptionLabel.Size = new System.Drawing.Size(449, 23);
+            this.ProductDescriptionLabel.Size = new System.Drawing.Size(449, 13);
             this.ProductDescriptionLabel.TabIndex = 53;
             // 
             // PawnDateLabel
             // 
-            this.PawnDateLabel.Location = new System.Drawing.Point(143, 189);
+            this.PawnDateLabel.Location = new System.Drawing.Point(143, 199);
             this.PawnDateLabel.Name = "PawnDateLabel";
-            this.PawnDateLabel.Size = new System.Drawing.Size(163, 23);
+            this.PawnDateLabel.Size = new System.Drawing.Size(163, 13);
             this.PawnDateLabel.TabIndex = 54;
             // 
             // PrincipalAmountLabel
             // 
-            this.PrincipalAmountLabel.Location = new System.Drawing.Point(143, 238);
+            this.PrincipalAmountLabel.Location = new System.Drawing.Point(143, 248);
             this.PrincipalAmountLabel.Name = "PrincipalAmountLabel";
-            this.PrincipalAmountLabel.Size = new System.Drawing.Size(163, 23);
+            this.PrincipalAmountLabel.Size = new System.Drawing.Size(163, 13);
             this.PrincipalAmountLabel.TabIndex = 56;
             // 
             // PrintButton
