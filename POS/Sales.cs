@@ -234,7 +234,7 @@ namespace POS
             {
                 string customerID = CustomerIDTextBox.Text;
                 string saleDate = GetSalesDate();
-                string invoiceNumber = CreateInvoiceNumber();
+                string invoiceNumber = "S" + CreateInvoiceNumber();
                 Dictionary<int, double> soldProducts = GetSalesInformation();
                 DataManager dataManager = new DataManager(connectionString);
                 foreach (KeyValuePair<int, double> pair in soldProducts)

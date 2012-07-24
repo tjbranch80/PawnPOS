@@ -258,7 +258,7 @@ namespace POS
 			string secondaryCategory = GetSelectedSecCategory();
 			string customerID = GetSelectedCustomerID();
 			string purchaseDate = GetDate();
-			string poNumber = createPONumber;
+			string poNumber = "PR" + createPONumber;
 			
 			DataManager dataManager = new DataManager(connectionString);
 			dataManager.InsertPurchaseItem(productID,productDesc,purchasePrice,primeCategory,

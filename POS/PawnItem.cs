@@ -220,7 +220,7 @@ namespace POS
 			double principal = Convert.ToDouble(PrincipalTextBox.Text);
 			double totalAmount = principal + financeCharge;
 			
-			string transactionID = createPONumber;
+			string transactionID = "P" + createPONumber;
 			string customerID = GetSelectedCustomerID();
 			string productDesc = ProductDescTextBox.Text;
 			string principalAmount = totalAmount.ToString();
