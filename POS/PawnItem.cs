@@ -227,10 +227,11 @@ namespace POS
 			string pawnDate = GetDate();
 			string status = "Open";
 			string defaultedDate = "1/1/1900";
+            string defaultDate = GetDefaultDate();
 			
 			DataManager dataManager = new DataManager(connectionString);
 			dataManager.InsertPawn(transactionID,customerID,productDesc,principalAmount,
-			                       pawnDate,status,defaultedDate);
+			                       pawnDate,status,defaultedDate,defaultDate);
 		}
 		
         public bool CheckDataInput()

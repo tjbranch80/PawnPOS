@@ -40,9 +40,7 @@ namespace POS
 	
 		}
 
-        Dictionary<string, DateTime> nonPaymentPawnDictonary = new Dictionary<string, DateTime>();
-        List<string> nonPaymentDefaultedPawn = new List<string>();
-        //List<string> singleTransactionChargeList = new List<string>();
+        Dictionary<string, DateTime> singlePawnDictonary = new Dictionary<string, DateTime>();
         //List<string> chargedTransactionIdList = new List<string>();
         //List<string> newChargeTransactionIdList = new List<string>();
         //List<string> paymentTransactionIdList = new List<string>();
@@ -61,9 +59,8 @@ namespace POS
             try
             {
                 ProcessCompleteLabel.Text = "Updating Transactions...";
-                GetNonPaymentPawnData();
-                CheckNonPaymentDate();
-        //        CheckOriginalDate();
+                GetSinglePawnData();
+                CheckSinglePawnDate();
         //        ApplySinglePawnFinanceCharge();
         //        GetChargedPawnTransactionId();
         //        CheckMaxChargeDate();
@@ -74,7 +71,7 @@ namespace POS
         //        GetAllTypesTransactionID();
         //        CheckMaxDate();
         //        ApplyAllTypesCharge();
-                SetPawnToDefault();
+        //        SetPawnToDefault();
                 ShowProcessCompleted();
             }
             catch(Exception ex)
@@ -116,11 +113,11 @@ namespace POS
 		
         #region Public Methods
 		
-        //public string GetFinanceCharge()
-        //{
-        //    string financeChargePercent = ConfigurationManager.AppSettings["FinanceCharge"];
-        //    return financeChargePercent;
-        //}
+        public string GetFinanceCharge()
+        {
+            string financeChargePercent = ConfigurationManager.AppSettings["FinanceCharge"];
+            return financeChargePercent;
+        }
 		
         public void ShowProcessCompleted()
         {
@@ -132,78 +129,74 @@ namespace POS
 		
         #endregion
 		
-        #region Process Non Payment Pawns
+        #region Process Single Pawns
 
-        public void GetNonPaymentPawnData()
+        public void GetSinglePawnData()
         {
             DataManager dataManager = new DataManager(connectionString);
-            nonPaymentPawnDictonary = dataManager.GetNonPaymentPawnData();
+            singlePawnDictonary = dataManager.GetSinglePawnData();
         }
 
-        public void CheckNonPaymentDate()
+        public void CheckSinglePawnDate()
         {
-            foreach (KeyValuePair<string, DateTime> pawn in nonPaymentPawnDictonary)
+            if (singlePawnDictonary.Count > 0)
             {
-                DateTime originalDate = pawn.Value;
-                DateTime today = DateTime.Today;
-                TimeSpan diffDays = today - originalDate;
-                double loanDays = diffDays.TotalDays;
-                string pawnID = pawn.Key;
-
-                if (loanDays >= 91)
+                foreach (KeyValuePair<string,DateTime> pawn in singlePawnDictonary)
                 {
-                    nonPaymentDefaultedPawn.Add(pawnID);
+                    DateTime originalDate = pawn.Value;
+                    DateTime today = DateTime.Today;
+                    TimeSpan diffDays = today - originalDate;
+                    double loanDays = diffDays.TotalDays;
+                    string pawnID = pawn.Key;
+
+                    if (loanDays >= 31)
+                    {
+                        ApplySinglePawnFinanceCharge(pawnID);
+                    }
                 }
             }
         }
-        
 
-        //public void CheckOriginalDate()
+        public void ApplySinglePawnFinanceCharge(string pawnID)
+        {
+            DataManager dataManager = new DataManager(connectionString);
+            double financeChargePercent = Convert.ToDouble(GetFinanceCharge());
+            double newBalance;
+            double financeCharge;
+
+            double principalAmount = dataManager.GetSinglePrincipalAmount(pawnID);
+
+            financeCharge = principalAmount * financeChargePercent;
+            newBalance = principalAmount + financeCharge;
+
+            dataManager.UpdatePawnChargesTable(pawnID, DateTime.Today, financeCharge.ToString(),
+                principalAmount.ToString(), newBalance.ToString());
+
+        }
+
+        #endregion
+
+        //public void CheckSinglePawnDefaultDate()
         //{
-        //    if (singleTransactionIdList.Count >= 1)
+        //    if (singlePawnDictonary.Count > 0)
         //    {
-        //        DataManager dataManager = new DataManager(connectionString);
-
-        //        foreach (string pawnID in singleTransactionIdList)
+        //        foreach (KeyValuePair<string, DateTime> pawn in singlePawnDictonary)
         //        {
-        //            DateTime originalDate = dataManager.GetSinglePawnDate(pawnID);
+        //            DateTime defaultDate = pawn.Value;
         //            DateTime today = DateTime.Today;
-        //            TimeSpan diffDays = today - originalDate;
-        //            double loanDays = diffDays.TotalDays;
+        //            TimeSpan diffDays = today - defaultDate;
+        //            double defaultTest = diffDays.TotalDays;
+        //            string pawnID = pawn.Key;
 
-        //            if (loanDays >= 31)
+        //            if (defaultTest >= 0)
         //            {
-        //                singleTransactionChargeList.Add(pawnID);
+        //                defaultedSinglePawn.Add(pawnID);
         //            }
         //        }
         //    }
         //}
 
-        //public void ApplySinglePawnFinanceCharge()
-        //{
-        //    if (singleTransactionChargeList.Count >= 1)
-        //    {
-        //        DataManager dataManager = new DataManager(connectionString);
-        //        double financeChargePercent = Convert.ToDouble(GetFinanceCharge());
-        //        double newBalance;
-        //        double financeCharge;
-
-        //        foreach (string pawnID in singleTransactionIdList)
-        //        {
-        //            double principalAmount = dataManager.GetSinglePrincipalAmount(pawnID);
-
-        //            financeCharge = principalAmount * financeChargePercent;
-        //            newBalance = principalAmount + financeCharge;
-
-        //            dataManager.UpdatePawnChargesTable(pawnID, DateTime.Today, financeCharge.ToString(), 
-        //                principalAmount.ToString(), newBalance.ToString());
-        //        }
-        //    }
-        //}
-		
-        #endregion
-
-        //#region Process Pawns With Charges But No Payments
+        #region Process Pawns With Charges But No Payments
 
         //public void GetChargedPawnTransactionId()
         //{
@@ -258,7 +251,7 @@ namespace POS
         //    }
         //}
 
-        //#endregion
+        #endregion
 
         //#region Process Pawns With No Charges But With Payments
 
@@ -388,10 +381,10 @@ namespace POS
 
             string dateDefaulted = DateTime.Today.ToShortDateString();
 
-            foreach (string pawnID in nonPaymentDefaultedPawn)
-            {
-                dataManager.UpdatePawnToDefault(pawnID, dateDefaulted);
-            }  	
+            //foreach (string pawnID in defaultedSinglePawn)
+            //{
+                //dataManager.UpdatePawnToDefault(pawnID, dateDefaulted);
+            //}  	
         }
     }
 }

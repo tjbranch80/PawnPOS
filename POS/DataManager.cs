@@ -323,7 +323,8 @@ namespace POS
         #region Create Pawn Transaction
 
         public void InsertPawn(string transactionID, string customerID, string productDesc
-                                        , string principalAmount, string pawnDate, string status, string defaultedDate)
+                                        , string principalAmount, string pawnDate, string status 
+                                        , string defaultedDate, string defaultDate)
         {
             using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
             {
@@ -331,7 +332,7 @@ namespace POS
 
                 string savePawn = @"INSERT INTO Pawn
 									VALUES(@transactionID,@customerID,@productDesc,
-									@principalAmount,@pawnDate,@status,@defaultedDate)";
+									@principalAmount,@pawnDate,@status,@defaultedDate,@defaultDate)";
 
                 using (SqlCeCommand command = new SqlCeCommand(savePawn, connection))
                 {
@@ -342,6 +343,7 @@ namespace POS
                     command.Parameters.AddWithValue("@pawnDate", pawnDate);
                     command.Parameters.AddWithValue("@status", status);
                     command.Parameters.AddWithValue("@defaultedDate", defaultedDate);
+                    command.Parameters.AddWithValue("@defaultDate", defaultDate);
 
                     command.ExecuteNonQuery();
                     connection.Close();
@@ -705,9 +707,9 @@ namespace POS
 
         #region Pawn Processing
 
-        #region Non-Payment Pawns
+        #region Single Pawns
 
-        public Dictionary<string,DateTime> GetNonPaymentPawnData()
+        public Dictionary<string,DateTime> GetSinglePawnData()
         {
             using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
             {
@@ -722,7 +724,10 @@ namespace POS
                                                         p.Status = 'Open'
                                                     AND 
                                                         p.TransactionID NOT IN (SELECT TransactionID
-                                                        FROM PawnPayments)";
+                                                        FROM PawnPayments)
+                                                    AND
+                                                        p.TransactionID NOT IN (SELECT TransactionID
+                                                        FROM PawnCharges)";
                 using (SqlCeCommand command = new SqlCeCommand(getNonPaymentPawnIdQuery, connection))
                 {
                     using (SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(command))
@@ -746,8 +751,6 @@ namespace POS
                 }
             }
         }
-
-        #endregion
 
         public double GetSinglePrincipalAmount(string transactionId)
         {
@@ -781,7 +784,7 @@ namespace POS
             }
         }
 
-      
+        #endregion
 
         #region Pawns With Charges and No Payments
 
