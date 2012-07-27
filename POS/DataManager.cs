@@ -707,46 +707,80 @@ namespace POS
 
         #region Pawn Processing
 
-        #region Single Pawns
-
-        public Dictionary<string,DateTime> GetSinglePawnData()
+        public Dictionary<string,DateTime> GetAllPawnData()
         {
             using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
             {
                 connection.Open();
 
-                string getNonPaymentPawnIdQuery = @"SELECT
-													    p.TransactionID,
-                                                        p.PawnDate
-													FROM 
-                                                        Pawn p
-													WHERE 
-                                                        p.Status = 'Open'
-                                                    AND 
-                                                        p.TransactionID NOT IN (SELECT TransactionID
-                                                        FROM PawnPayments)
-                                                    AND
-                                                        p.TransactionID NOT IN (SELECT TransactionID
-                                                        FROM PawnCharges)";
-                using (SqlCeCommand command = new SqlCeCommand(getNonPaymentPawnIdQuery, connection))
+                string getAllPawnIdQuery = @"SELECT
+										      p.TransactionID,
+                                              p.DefaultDate
+											FROM 
+                                              Pawn p
+											WHERE 
+                                              p.Status = 'Open'";
+    
+                using (SqlCeCommand command = new SqlCeCommand(getAllPawnIdQuery, connection))
                 {
                     using (SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(command))
                     {
-                        DataTable nonPaymentTable = new DataTable();
-                        Dictionary<string, DateTime> nonPaymentDictonary = new Dictionary<string, DateTime>();
-                        dataAdapter.Fill(nonPaymentTable);
+                        DataTable allPawnDataTable = new DataTable();
+                        Dictionary<string, DateTime> allPawnDataDictonary = new Dictionary<string, DateTime>();
+                        dataAdapter.Fill(allPawnDataTable);
+                        connection.Close();
+                        string pawnId = string.Empty;
+                        DateTime defaultDate = Convert.ToDateTime("1/1/1900");
+
+                        for (int i = 0; i < allPawnDataTable.Rows.Count; i++)
+                        {
+                            pawnId = allPawnDataTable.Rows[i]["TransactionID"].ToString();
+                            defaultDate = Convert.ToDateTime(allPawnDataTable.Rows[i]["DefaultDate"]);
+                            allPawnDataDictonary.Add(pawnId, defaultDate);
+                        }
+
+                        return allPawnDataDictonary;
+                    }
+                }
+            }
+        }
+
+        public Dictionary<string, DateTime> GetSinglePawnData()
+        {
+            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"SELECT
+								    p.TransactionID,
+                                    p.PawnDate
+								FROM 
+                                    Pawn p
+								WHERE 
+                                    p.Status = 'Open'
+                                AND
+                                    p.TransactionID NOT IN (SELECT TransactionID
+                                    FROM PawnCharges)";
+
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
+                {
+                    using (SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(command))
+                    {
+                        DataTable dataTable = new DataTable();
+                        Dictionary<string, DateTime> dictonary = new Dictionary<string, DateTime>();
+                        dataAdapter.Fill(dataTable);
                         connection.Close();
                         string pawnId = string.Empty;
                         DateTime pawnDate = Convert.ToDateTime("1/1/1900");
 
-                        for (int i = 0; i < nonPaymentTable.Rows.Count; i++)
+                        for (int i = 0; i < dataTable.Rows.Count; i++)
                         {
-                            pawnId = nonPaymentTable.Rows[i]["TransactionID"].ToString();
-                            pawnDate = Convert.ToDateTime(nonPaymentTable.Rows[i]["PawnDate"]);
-                            nonPaymentDictonary.Add(pawnId, pawnDate);
+                            pawnId = dataTable.Rows[i]["TransactionID"].ToString();
+                            pawnDate = Convert.ToDateTime(dataTable.Rows[i]["PawnDate"]);
+                            dictonary.Add(pawnId, pawnDate);
                         }
 
-                        return nonPaymentDictonary;
+                        return dictonary;
                     }
                 }
             }
@@ -785,6 +819,8 @@ namespace POS
         }
 
         #endregion
+
+        
 
         #region Pawns With Charges and No Payments
 
@@ -1194,7 +1230,7 @@ namespace POS
             }
         }
 
-        #endregion
+   
 
         #region Create a Pawn Payment
 

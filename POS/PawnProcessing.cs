@@ -40,7 +40,9 @@ namespace POS
 	
 		}
 
-        Dictionary<string, DateTime> singlePawnDictonary = new Dictionary<string, DateTime>();
+        Dictionary<string, DateTime> allPawnDataDictonary = new Dictionary<string, DateTime>();
+        Dictionary<string, DateTime> singlePawnDataDictionary = new Dictionary<string, DateTime>();
+        List<string> defaultedPawnList = new List<string>();
         //List<string> chargedTransactionIdList = new List<string>();
         //List<string> newChargeTransactionIdList = new List<string>();
         //List<string> paymentTransactionIdList = new List<string>();
@@ -48,8 +50,7 @@ namespace POS
         //List<string> allTypesTransactionIdList = new List<string>();
         //Dictionary<string, DateTime> dateDic = new Dictionary<string, DateTime>();
         //List<string> newChargedAllTypesTransactionIdList = new List<string>();
-        //List<string> defaultedPawnsList = new List<string>();
-		
+        
         #endregion
 
         #region Private Methods
@@ -61,7 +62,8 @@ namespace POS
                 ProcessCompleteLabel.Text = "Updating Transactions...";
                 GetSinglePawnData();
                 CheckSinglePawnDate();
-        //        ApplySinglePawnFinanceCharge();
+                //GetAllPawnData();
+                //CheckPawnDefaultDate();
         //        GetChargedPawnTransactionId();
         //        CheckMaxChargeDate();
         //        ApplyChargedFinanceCharge();
@@ -128,20 +130,20 @@ namespace POS
         }
 		
         #endregion
-		
-        #region Process Single Pawns
+
+        #region Check If A Finance Charge Needs To Be Applied
 
         public void GetSinglePawnData()
         {
             DataManager dataManager = new DataManager(connectionString);
-            singlePawnDictonary = dataManager.GetSinglePawnData();
+            singlePawnDataDictionary = dataManager.GetSinglePawnData();
         }
 
         public void CheckSinglePawnDate()
         {
-            if (singlePawnDictonary.Count > 0)
+            if (singlePawnDataDictionary.Count > 0)
             {
-                foreach (KeyValuePair<string,DateTime> pawn in singlePawnDictonary)
+                foreach (KeyValuePair<string, DateTime> pawn in singlePawnDataDictionary)
                 {
                     DateTime originalDate = pawn.Value;
                     DateTime today = DateTime.Today;
@@ -176,33 +178,47 @@ namespace POS
 
         #endregion
 
-        //public void CheckSinglePawnDefaultDate()
-        //{
-        //    if (singlePawnDictonary.Count > 0)
-        //    {
-        //        foreach (KeyValuePair<string, DateTime> pawn in singlePawnDictonary)
-        //        {
-        //            DateTime defaultDate = pawn.Value;
-        //            DateTime today = DateTime.Today;
-        //            TimeSpan diffDays = today - defaultDate;
-        //            double defaultTest = diffDays.TotalDays;
-        //            string pawnID = pawn.Key;
+        #region Check If Pawn Is Defaulted
 
-        //            if (defaultTest >= 0)
-        //            {
-        //                defaultedSinglePawn.Add(pawnID);
-        //            }
-        //        }
-        //    }
-        //}
+        public void GetAllPawnData()
+        {
+            DataManager dataManager = new DataManager(connectionString);
+            allPawnDataDictonary = dataManager.GetAllPawnData();
+        }
+
+        public void CheckPawnDefaultDate()
+        {
+            if (allPawnDataDictonary.Count > 0)
+            {
+                foreach (KeyValuePair<string, DateTime> pawn in allPawnDataDictonary)
+                {
+                    DateTime defaultDate = pawn.Value;
+                    DateTime today = DateTime.Today;
+                    TimeSpan diffDays = today - defaultDate;
+                    double defaultTest = diffDays.TotalDays;
+                    string pawnID = pawn.Key;
+
+                    if (defaultTest >= 0)
+                    {
+                        defaultedPawnList.Add(pawnID);
+                    }
+                }
+            }
+        }
+
+        public void GetChargedPawnTransactionId()
+        {
+            DataManager dataManager = new DataManager(connectionString);
+            chargedTransactionIdList = dataManager.GetChargedPawnTransactionID();
+        }
+
+        #endregion
+
+        
 
         #region Process Pawns With Charges But No Payments
 
-        //public void GetChargedPawnTransactionId()
-        //{
-        //    DataManager dataManager = new DataManager(connectionString);
-        //    chargedTransactionIdList = dataManager.GetChargedPawnTransactionID();
-        //}
+        
 
         //public void CheckMaxChargeDate()
         //{
