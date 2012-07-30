@@ -713,33 +713,33 @@ namespace POS
             {
                 connection.Open();
 
-                string getAllPawnIdQuery = @"SELECT
-										      p.TransactionID,
-                                              p.DefaultDate
-											FROM 
-                                              Pawn p
-											WHERE 
-                                              p.Status = 'Open'";
+                string query = @"SELECT
+								    p.TransactionID,
+                                    p.DefaultDate
+								FROM 
+                                    Pawn p
+								WHERE 
+                                    p.Status = 'Open'";
     
-                using (SqlCeCommand command = new SqlCeCommand(getAllPawnIdQuery, connection))
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
                 {
                     using (SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(command))
                     {
-                        DataTable allPawnDataTable = new DataTable();
-                        Dictionary<string, DateTime> allPawnDataDictonary = new Dictionary<string, DateTime>();
-                        dataAdapter.Fill(allPawnDataTable);
+                        DataTable dataTable = new DataTable();
+                        Dictionary<string, DateTime> dictionary = new Dictionary<string, DateTime>();
+                        dataAdapter.Fill(dataTable);
                         connection.Close();
                         string pawnId = string.Empty;
                         DateTime defaultDate = Convert.ToDateTime("1/1/1900");
 
-                        for (int i = 0; i < allPawnDataTable.Rows.Count; i++)
+                        for (int i = 0; i < dataTable.Rows.Count; i++)
                         {
-                            pawnId = allPawnDataTable.Rows[i]["TransactionID"].ToString();
-                            defaultDate = Convert.ToDateTime(allPawnDataTable.Rows[i]["DefaultDate"]);
-                            allPawnDataDictonary.Add(pawnId, defaultDate);
+                            pawnId = dataTable.Rows[i]["TransactionID"].ToString();
+                            defaultDate = Convert.ToDateTime(dataTable.Rows[i]["DefaultDate"]);
+                            dictionary.Add(pawnId, defaultDate);
                         }
 
-                        return allPawnDataDictonary;
+                        return dictionary;
                     }
                 }
             }
@@ -818,47 +818,41 @@ namespace POS
             }
         }
 
-        #endregion
-
-        
-
-        #region Pawns With Charges and No Payments
-
-        public List<string> GetChargedPawnTransactionID()
+        public List<string> GetChargedPawnId()
         {
             using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
             {
                 connection.Open();
 
-                string getPawnTransactionIdQuery = @"SELECT
-													    p.TransactionID
-													FROM 
-                                                        Pawn p
-													WHERE 
-                                                        p.Status = 'Open'
-                                                    AND 
-                                                        p.TransactionID IN (SELECT TransactionID
-                                                        FROM PawnCharges)
-                                                    AND 
-                                                        p.TransactionID NOT IN (SELECT TransactionID
-                                                        FROM PawnPayments)";
-                using (SqlCeCommand command = new SqlCeCommand(getPawnTransactionIdQuery, connection))
+                string query = @"SELECT
+									p.TransactionID
+								FROM 
+                                    Pawn p
+								WHERE 
+                                    p.Status = 'Open'
+                                AND 
+                                    p.TransactionID IN (SELECT TransactionID
+                                    FROM PawnCharges)
+                                AND 
+                                    p.TransactionID NOT IN (SELECT TransactionID
+                                    FROM PawnPayments)";
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
                 {
                     using (SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(command))
                     {
-                        DataTable transactionIdTable = new DataTable();
-                        dataAdapter.Fill(transactionIdTable);
+                        DataTable dataTable = new DataTable();
+                        dataAdapter.Fill(dataTable);
                         connection.Close();
-                        List<string> transactionIdList = new List<string>();
-                        string transactionId = string.Empty;
+                        List<string> list = new List<string>();
+                        string pawnId = string.Empty;
 
-                        for (int i = 0; i < transactionIdTable.Rows.Count; i++)
+                        for (int i = 0; i < dataTable.Rows.Count; i++)
                         {
-                            transactionId = transactionIdTable.Rows[i]["TransactionID"].ToString();
-                            transactionIdList.Add(transactionId);
+                            pawnId = dataTable.Rows[i]["TransactionID"].ToString();
+                            list.Add(pawnId);
                         }
 
-                        return transactionIdList;
+                        return list;
                     }
                 }
             }
@@ -870,33 +864,33 @@ namespace POS
             {
                 connection.Open();
 
-                string getMaxDateQuery = @"SELECT
-										    pc.ChargeDate
-									     FROM 
-                                            PawnCharges pc
-										 WHERE 
-                                            pc.TransactionID = @transactionID";
-                using (SqlCeCommand command = new SqlCeCommand(getMaxDateQuery, connection))
+                string query = @"SELECT
+								    pc.ChargeDate
+							     FROM 
+                                    PawnCharges pc
+								 WHERE 
+                                    pc.TransactionID = @transactionID";
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@transactionID", transactionId);
 
                     using (SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(command))
                     {
-                        DataTable maxDateTable = new DataTable();
-                        dataAdapter.Fill(maxDateTable);
+                        DataTable dataTable = new DataTable();
+                        dataAdapter.Fill(dataTable);
                         connection.Close();
-                        List<DateTime> dateList = new List<DateTime>();
+                        List<DateTime> list = new List<DateTime>();
                         DateTime maxDate;
                         DateTime date;
 
-                        for (int i = 0; i < maxDateTable.Rows.Count; i++)
+                        for (int i = 0; i < dataTable.Rows.Count; i++)
                         {
-                            maxDate = Convert.ToDateTime(maxDateTable.Rows[i]["ChargeDate"]);
-                            dateList.Add(maxDate);
+                            maxDate = Convert.ToDateTime(dataTable.Rows[i]["ChargeDate"]);
+                            list.Add(maxDate);
                         }
-                        if (dateList.Count >= 1)
+                        if (list.Count >= 1)
                         {
-                            date = dateList.Max();
+                            date = list.Max();
                         }
                         else
                         {
@@ -916,33 +910,33 @@ namespace POS
             {
                 connection.Open();
 
-                string getMaxDateQuery = @"SELECT
-										    pc.NewPrincipal
-									     FROM 
-                                            PawnCharges pc
-										 WHERE 
-                                            pc.TransactionID = @transactionID";
-                using (SqlCeCommand command = new SqlCeCommand(getMaxDateQuery, connection))
+                string query = @"SELECT
+									pc.NewPrincipal
+							     FROM 
+                                    PawnCharges pc
+								 WHERE 
+                                    pc.TransactionID = @transactionID";
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@transactionID", transactionId);
 
                     using (SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(command))
                     {
-                        DataTable maxPrincipalTable = new DataTable();
-                        dataAdapter.Fill(maxPrincipalTable);
+                        DataTable dataTable = new DataTable();
+                        dataAdapter.Fill(dataTable);
                         connection.Close();
-                        List<double> newPrincipalList = new List<double>();
+                        List<double> list = new List<double>();
                         double maxNewPrincipal;
                         double maxPrincipalAmount;
 
-                        for (int i = 0; i < maxPrincipalTable.Rows.Count; i++)
+                        for (int i = 0; i < dataTable.Rows.Count; i++)
                         {
-                            maxNewPrincipal = Convert.ToDouble(maxPrincipalTable.Rows[i]["NewPrincipal"]);
-                            newPrincipalList.Add(maxNewPrincipal);
+                            maxNewPrincipal = Convert.ToDouble(dataTable.Rows[i]["NewPrincipal"]);
+                            list.Add(maxNewPrincipal);
                         }
-                        if (newPrincipalList.Count >= 1)
+                        if (list.Count >= 1)
                         {
-                            maxPrincipalAmount = newPrincipalList.Max();
+                            maxPrincipalAmount = list.Max();
                         }
                         else
                         {
@@ -955,45 +949,41 @@ namespace POS
             }
         }
 
-        #endregion
-
-        #region Pawns With Payments and No Charges
-
         public List<string> GetPaymentPawnTransactionID()
         {
             using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
             {
                 connection.Open();
 
-                string getPawnTransactionIdQuery = @"SELECT
-													    p.TransactionID
-													FROM 
-                                                        Pawn p
-													WHERE 
-                                                        p.Status = 'Open'
-                                                    AND 
-                                                        p.TransactionID IN (SELECT TransactionID
-                                                        FROM PawnPayments)
-                                                    AND 
-                                                        p.TransactionID NOT IN (SELECT TransactionID
-                                                        FROM PawnCharges)";
-                using (SqlCeCommand command = new SqlCeCommand(getPawnTransactionIdQuery, connection))
+                string query = @"SELECT
+			                        p.TransactionID
+								 FROM 
+                                    Pawn p
+								 WHERE 
+                                    p.Status = 'Open'
+                                 AND 
+                                    p.TransactionID IN (SELECT TransactionID
+                                    FROM PawnPayments)
+                                 AND 
+                                    p.TransactionID NOT IN (SELECT TransactionID
+                                    FROM PawnCharges)";
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
                 {
                     using (SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(command))
                     {
-                        DataTable transactionIdTable = new DataTable();
-                        dataAdapter.Fill(transactionIdTable);
+                        DataTable dataTable = new DataTable();
+                        dataAdapter.Fill(dataTable);
                         connection.Close();
-                        List<string> transactionIdList = new List<string>();
+                        List<string> list = new List<string>();
                         string transactionId = string.Empty;
 
-                        for (int i = 0; i < transactionIdTable.Rows.Count; i++)
+                        for (int i = 0; i < dataTable.Rows.Count; i++)
                         {
-                            transactionId = transactionIdTable.Rows[i]["TransactionID"].ToString();
-                            transactionIdList.Add(transactionId);
+                            transactionId = dataTable.Rows[i]["TransactionID"].ToString();
+                            list.Add(transactionId);
                         }
 
-                        return transactionIdList;
+                        return list;
                     }
                 }
             }
@@ -1001,37 +991,37 @@ namespace POS
 
         public DateTime GetMaxPaymentDate(string transactionId)
         {
-           using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
+            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
             {
                 connection.Open();
 
-                string getMaxDateQuery = @"SELECT
-										    pp.PaymentDate
-									     FROM 
-                                            PawnPayments pp
-										 WHERE 
-                                            pp.TransactionID = @transactionID";
-                using (SqlCeCommand command = new SqlCeCommand(getMaxDateQuery, connection))
+                string query = @"SELECT
+									pp.PaymentDate
+								FROM 
+                                    PawnPayments pp
+								WHERE 
+                                    pp.TransactionID = @transactionID";
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@transactionID", transactionId);
 
                     using (SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(command))
                     {
-                        DataTable maxDateTable = new DataTable();
-                        dataAdapter.Fill(maxDateTable);
+                        DataTable dataTable = new DataTable();
+                        dataAdapter.Fill(dataTable);
                         connection.Close();
-                        List<DateTime> dateList = new List<DateTime>();
+                        List<DateTime> list = new List<DateTime>();
                         DateTime maxDate;
                         DateTime date;
 
-                        for (int i = 0; i < maxDateTable.Rows.Count; i++)
+                        for (int i = 0; i < dataTable.Rows.Count; i++)
                         {
-                            maxDate = Convert.ToDateTime(maxDateTable.Rows[i]["PaymentDate"]);
-                            dateList.Add(maxDate);
+                            maxDate = Convert.ToDateTime(dataTable.Rows[i]["PaymentDate"]);
+                            list.Add(maxDate);
                         }
-                        if (dateList.Count >= 1)
+                        if (list.Count >= 1)
                         {
-                            date = dateList.Max();
+                            date = list.Max();
                         }
                         else
                         {
@@ -1042,7 +1032,7 @@ namespace POS
                     }
 
                 }
-            } 
+            }
         }
 
         public double GetMaxPaymentPrincipal(string transactionId)
@@ -1051,33 +1041,33 @@ namespace POS
             {
                 connection.Open();
 
-                string getMaxDateQuery = @"SELECT
-										    pp.NewPrincipal
-									     FROM 
-                                            PawnPayments pp
-										 WHERE 
-                                            pp.TransactionID = @transactionID";
-                using (SqlCeCommand command = new SqlCeCommand(getMaxDateQuery, connection))
+                string query = @"SELECT
+									pp.NewPrincipal
+								FROM 
+                                    PawnPayments pp
+								WHERE 
+                                    pp.TransactionID = @transactionID";
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@transactionID", transactionId);
 
                     using (SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(command))
                     {
-                        DataTable maxPrincipalTable = new DataTable();
-                        dataAdapter.Fill(maxPrincipalTable);
+                        DataTable dataTable = new DataTable();
+                        dataAdapter.Fill(dataTable);
                         connection.Close();
-                        List<double> newPrincipalList = new List<double>();
+                        List<double> list = new List<double>();
                         double maxNewPrincipal;
                         double maxPrincipalAmount;
 
-                        for (int i = 0; i < maxPrincipalTable.Rows.Count; i++)
+                        for (int i = 0; i < dataTable.Rows.Count; i++)
                         {
-                            maxNewPrincipal = Convert.ToDouble(maxPrincipalTable.Rows[i]["NewPrincipal"]);
-                            newPrincipalList.Add(maxNewPrincipal);
+                            maxNewPrincipal = Convert.ToDouble(dataTable.Rows[i]["NewPrincipal"]);
+                            list.Add(maxNewPrincipal);
                         }
-                        if (newPrincipalList.Count >= 1)
+                        if (list.Count >= 1)
                         {
-                            maxPrincipalAmount = newPrincipalList.Max();
+                            maxPrincipalAmount = list.Max();
                         }
                         else
                         {
@@ -1090,97 +1080,103 @@ namespace POS
             }
         }
 
-        #endregion
-
-        #region Pawns With Payments and Charges
-
         public List<string> GetAllTypesPawnTransactionID()
         {
             using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
             {
                 connection.Open();
 
-                string getPawnTransactionIdQuery = @"SELECT
-													    p.TransactionID
-													FROM 
-                                                        Pawn p
-													WHERE 
-                                                        p.Status = 'Open'
-                                                    AND 
-                                                        p.TransactionID IN (SELECT TransactionID
-                                                        FROM PawnPayments)
-                                                    AND 
-                                                        p.TransactionID IN (SELECT TransactionID
-                                                        FROM PawnCharges)";
-                using (SqlCeCommand command = new SqlCeCommand(getPawnTransactionIdQuery, connection))
+                string query = @"SELECT
+									p.TransactionID
+								FROM 
+                                    Pawn p
+								WHERE 
+                                    p.Status = 'Open'
+                                AND 
+                                    p.TransactionID IN (SELECT TransactionID
+                                    FROM PawnPayments)
+                                AND 
+                                    p.TransactionID IN (SELECT TransactionID
+                                    FROM PawnCharges)";
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
                 {
                     using (SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(command))
                     {
-                        DataTable transactionIdTable = new DataTable();
-                        dataAdapter.Fill(transactionIdTable);
+                        DataTable dataTable = new DataTable();
+                        dataAdapter.Fill(dataTable);
                         connection.Close();
-                        List<string> transactionIdList = new List<string>();
+                        List<string> list = new List<string>();
                         string transactionId = string.Empty;
 
-                        for (int i = 0; i < transactionIdTable.Rows.Count; i++)
+                        for (int i = 0; i < dataTable.Rows.Count; i++)
                         {
-                            transactionId = transactionIdTable.Rows[i]["TransactionID"].ToString();
-                            transactionIdList.Add(transactionId);
+                            transactionId = dataTable.Rows[i]["TransactionID"].ToString();
+                            list.Add(transactionId);
                         }
 
-                        return transactionIdList;
+                        return list;
                     }
                 }
             }
         }
 
-        public Dictionary<string,DateTime> GetAllTypesMaxDate(string transactionId)
+        public Dictionary<string, DateTime> GetAllTypesMaxDate(string transactionId)
         {
             using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
             {
                 connection.Open();
 
-                string getMaxDateQuery = @"SELECT
-                                            pp.PaymentDate,
-                                            pc.ChargeDate 
-									     FROM 
-                                            PawnPayments pp
-                                            JOIN PawnCharges pc ON pp.TransactionID=pc.TransactionID 
-										 WHERE 
-                                            pp.TransactionID = @transactionID";
-                using (SqlCeCommand command = new SqlCeCommand(getMaxDateQuery, connection))
+                string query = @"SELECT
+                                   pp.PaymentDate,
+                                   pc.ChargeDate 
+							    FROM 
+                                   PawnPayments pp
+                                   JOIN PawnCharges pc ON pp.TransactionID=pc.TransactionID 
+								WHERE 
+                                   pp.TransactionID = @transactionID";
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@transactionID", transactionId);
 
                     using (SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(command))
                     {
-                        DataTable maxDateTable = new DataTable();
-                        dataAdapter.Fill(maxDateTable);
+                        DataTable dataTable = new DataTable();
+                        dataAdapter.Fill(dataTable);
                         connection.Close();
-                        Dictionary<string, DateTime> dateDic = new Dictionary<string, DateTime>();
+                        Dictionary<string, DateTime> dictionary = new Dictionary<string, DateTime>();
                         DateTime maxPaymentDate;
                         DateTime maxChargeDate;
                         int counter = 0;
 
-                        for (int i = 0; i < maxDateTable.Rows.Count; i++)
+                        for (int i = 0; i < dataTable.Rows.Count; i++)
                         {
                             counter = counter + 1;
-                            maxPaymentDate = Convert.ToDateTime(maxDateTable.Rows[i]["PaymentDate"]);
-                            dateDic.Add("PaymentDate" + counter.ToString(),maxPaymentDate);
-                            maxChargeDate = Convert.ToDateTime(maxDateTable.Rows[i]["ChargeDate"]);
-                            dateDic.Add("ChargeDate" + counter.ToString(),maxChargeDate);
+                            maxPaymentDate = Convert.ToDateTime(dataTable.Rows[i]["PaymentDate"]);
+                            dictionary.Add("PaymentDate" + counter.ToString(), maxPaymentDate);
+                            maxChargeDate = Convert.ToDateTime(dataTable.Rows[i]["ChargeDate"]);
+                            dictionary.Add("ChargeDate" + counter.ToString(), maxChargeDate);
                         }
 
-                        return dateDic;
+                        var maxKey = string.Empty;
+                        var maxDate = DateTime.MinValue;
+                        Dictionary<string, DateTime> maxDateDictionary = new Dictionary<string, DateTime>();
+
+                        foreach (var kvp in dictionary)
+                        {
+                            if (kvp.Value > maxDate)
+                            {
+                                maxKey = kvp.Key;
+                                maxDate = kvp.Value;
+                                maxDateDictionary.Add(kvp.Key, kvp.Value);
+                            }
+                        }
+
+                        return maxDateDictionary;
                     }
 
                 }
             }
         }
-
-        #endregion
-
-        #region Update a Pawn To Default
 
         public void UpdatePawnToDefault(string transactionID, string defaultedDate)
         {
@@ -1188,7 +1184,7 @@ namespace POS
             {
                 connection.Open();
 
-                string updateToDefault =    @"Update Pawn
+                string updateToDefault = @"Update Pawn
 											SET Status = 'Default',
                                             DateDefaulted = @defaultedDate
 											WHERE TransactionID = @transactionID";
