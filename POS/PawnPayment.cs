@@ -92,6 +92,7 @@ namespace POS
                 }
                 else
                 {
+                    IncreaseDefaultDate();
                     AddPaymentToTransaction();
                     MessageBox.Show("Payment Was Added Successfully");
                     CreatePawnPaymentReceipt();
@@ -198,6 +199,23 @@ namespace POS
             string transactionID = TransIDTextBox.Text;
             double currentPrincipal = dataManager.GetCurrentPrincipal(transactionID);
             return currentPrincipal;
+        }
+
+        public void IncreaseDefaultDate()
+        {
+            DataManager dataManager = new DataManager(connectionString);
+            DateTime oldDate = DateTime.MinValue;
+            DateTime newDefaultDate;
+            string pawnID = TransIDTextBox.Text;
+
+            for (int i = 0; i < pawnInfoData.Rows.Count; i++)
+            {
+                oldDate = Convert.ToDateTime(pawnInfoData.Rows[i]["DefaultDate"]);
+            }
+
+            newDefaultDate = oldDate.AddDays(30);
+
+            dataManager.UpdateDefaultDate(pawnID, newDefaultDate.ToString());
         }
 
         public void AddPaymentToTransaction()

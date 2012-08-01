@@ -133,6 +133,12 @@
     <Compile Include="DefaultPawnReport.Designer.cs">
       <DependentUpon>DefaultPawnReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="LayawayReceipt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LayawayReceipt.Designer.cs">
+      <DependentUpon>LayawayReceipt.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -234,6 +240,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DefaultPawnReport.resx">
       <DependentUpon>DefaultPawnReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LayawayReceipt.resx">
+      <DependentUpon>LayawayReceipt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>

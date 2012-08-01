@@ -107,30 +107,6 @@ namespace POS
             }
         }
 
-        public void SaveInvoiceData(string invoiceNumber, string totalSale, string salesTax, string saleDate,
-                                    string customerID, string grandTotal)
-        {
-            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
-            {
-                connection.Open();
-
-                string saveInvoiceData = @"INSERT INTO Invoice VALUES(@invoiceNumber,
-                                           @totalSale,@salesTax,@saleDate,@customerID,@grandTotal)";
-                using (SqlCeCommand command = new SqlCeCommand(saveInvoiceData, connection))
-                {
-                    command.Parameters.AddWithValue("@invoiceNumber", invoiceNumber);
-                    command.Parameters.AddWithValue("@totalSale", totalSale);
-                    command.Parameters.AddWithValue("@salesTax", salesTax);
-                    command.Parameters.AddWithValue("@saleDate", saleDate);
-                    command.Parameters.AddWithValue("@customerID", customerID);
-                    command.Parameters.AddWithValue("@grandTotal", grandTotal);
-
-                    command.ExecuteNonQuery();
-                    connection.Close();
-                }
-            }
-        }
-
         #endregion
 
         #region Program Maintenance
@@ -354,6 +330,30 @@ namespace POS
         #endregion
 
         #region Multi Use Queries
+
+        public void SaveInvoiceData(string invoiceNumber, string totalSale, string salesTax, string saleDate,
+                                    string customerID, string grandTotal)
+        {
+            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
+            {
+                connection.Open();
+
+                string saveInvoiceData = @"INSERT INTO Invoice VALUES(@invoiceNumber,
+                                           @totalSale,@salesTax,@saleDate,@customerID,@grandTotal)";
+                using (SqlCeCommand command = new SqlCeCommand(saveInvoiceData, connection))
+                {
+                    command.Parameters.AddWithValue("@invoiceNumber", invoiceNumber);
+                    command.Parameters.AddWithValue("@totalSale", totalSale);
+                    command.Parameters.AddWithValue("@salesTax", salesTax);
+                    command.Parameters.AddWithValue("@saleDate", saleDate);
+                    command.Parameters.AddWithValue("@customerID", customerID);
+                    command.Parameters.AddWithValue("@grandTotal", grandTotal);
+
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+        }
 
         public DataTable GetAllInventory()
         {
@@ -1199,8 +1199,6 @@ namespace POS
             }
         }
 
-        #endregion
-
         public void UpdatePawnChargesTable(string transactionID, DateTime chargeDate, string
             chargeAmount, string originalPrincipal, string newPrincipal)
         {
@@ -1226,7 +1224,7 @@ namespace POS
             }
         }
 
-   
+        #endregion
 
         #region Create a Pawn Payment
 
@@ -1239,6 +1237,7 @@ namespace POS
                 string pawnInfoQuery = @"SELECT
                                             p.TransactionID,
                                             p.CustomerID,
+                                            p.DefaultDate,
                                             c.FirstName,
                                             c.LastName 
                                          FROM 
@@ -1467,6 +1466,26 @@ namespace POS
             }
         }
 
+        public void UpdateDefaultDate(string transactionID, string newDefaultDate)
+        {
+            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"Update Pawn
+								SET DefaultDate = @newDefaultDate
+								WHERE TransactionID = @transactionID";
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@transactionID", transactionID);
+                    command.Parameters.AddWithValue("@newDefaultDate", newDefaultDate);
+
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+        }
+
         #endregion
 
         #region Create a Pawn Payment Receipt
@@ -1533,9 +1552,91 @@ namespace POS
 
         #region Create a Layaway Transaction
 
+        public string GetProductDescription(string productID)
+        {
+            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
+            {
+                connection.Open();
+                
+                string query = @"SELECT 
+                                    i.ProductDescription
+                                 FROM 
+                                    Inventory i
+                                 WHERE 
+                                    i.ProductID = @productID";
 
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@productID", productID);
 
+                    using (SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(command))
+                    {
+                        DataTable dataTable = new DataTable();
+                        dataAdapter.Fill(dataTable);
+                        connection.Close();
+                        string productDescription = string.Empty;
+
+                        for (int i = 0; i < dataTable.Rows.Count; i++)
+                        {
+                            productDescription = Convert.ToString(dataTable.Rows[i]["ProductDescription"]);
+                        }
+                        return productDescription;
+                    }
+                }
+            }
+        }
+
+        public void InsertLayaway(string transactionID, string customerID, string productDesc
+                                        , string principalAmount,string owedAmount, string layawayDate 
+                                        , string status, string defaultedDate, string defaultDate)
+        {
+            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"INSERT INTO Layaway
+								VALUES(@transactionID,@customerID,@productDesc,
+								@principalAmount,@owedAmount,@layawayDate,@status,
+                                @defaultedDate,@defaultDate)";
+
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@transactionID", transactionID);
+                    command.Parameters.AddWithValue("@customerID", customerID);
+                    command.Parameters.AddWithValue("@productDesc", productDesc);
+                    command.Parameters.AddWithValue("@principalAmount", principalAmount);
+                    command.Parameters.AddWithValue("@owedAmount", owedAmount);
+                    command.Parameters.AddWithValue("@layawayDate", layawayDate);
+                    command.Parameters.AddWithValue("@status", status);
+                    command.Parameters.AddWithValue("@defaultedDate", defaultedDate);
+                    command.Parameters.AddWithValue("@defaultDate", defaultDate);
+
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+        }
+
+        public void UpdateStatusLayaway(string productID)
+        {
+            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"UPDATE Inventory
+                                 SET ProductStatus = 'Layaway'
+                                 WHERE ProductID = @productID";
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@productID", productID);
+
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+        }
 
         #endregion
+
     }
 }

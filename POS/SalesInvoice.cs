@@ -15,7 +15,6 @@ namespace POS
 
         string connectionString;
         
-        
         public SalesInvoice()
         {
             InitializeComponent();
@@ -32,7 +31,6 @@ namespace POS
            
         }
          
-
         #endregion
 
         #region Product Data Collection
@@ -243,5 +241,6 @@ namespace POS
 		}
 
         #endregion
+
     }
 }
