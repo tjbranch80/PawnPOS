@@ -190,6 +190,22 @@ namespace POS
             }
         }
 
+        private void LayawayPaymentButton_Click(object sender, EventArgs e)
+        {
+            LayawayPayment layawayPayment = null;
+            if (layawayPayment != null)
+            {
+                layawayPayment.Activate();
+            }
+            else
+            {
+                layawayPayment = new LayawayPayment();
+                layawayPayment.Show();
+            }
+        }
+
         #endregion
+
+        
     }
 }

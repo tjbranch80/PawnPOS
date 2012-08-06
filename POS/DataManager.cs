@@ -1638,5 +1638,273 @@ namespace POS
 
         #endregion
 
+        #region Create a Layaway Payment
+
+        public DataTable GetLayawayTransactions()
+        {
+            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"SELECT
+                                   l.TransactionID,
+                                   l.CustomerID,
+                                   l.DefaultDate,
+                                   c.FirstName,
+                                   c.LastName 
+                                 FROM 
+                                   Layaway l
+                                   JOIN Customers c ON l.CustomerID = c.CustomerID";
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
+                {
+                    using (SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(command))
+                    {
+                        DataTable dataTable = new DataTable();
+                        dataAdapter.Fill(dataTable);
+                        connection.Close();
+                        return dataTable;
+                    }
+                }
+            }
+        }
+
+        public DataTable GetLayawayDetails(string transactionID)
+        {
+            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"SELECT
+                                   l.ProductDescription,
+                                   l.Status,
+                                   l.LayawayDate,
+                                   l.PrincipalAmount
+                                 FROM 
+                                   Layaway l
+                                 WHERE
+                                   l.TransactionID = @transactionID";
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@transactionID", transactionID);
+
+                    using (SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(command))
+                    {
+                        DataTable dataTable = new DataTable();
+                        dataAdapter.Fill(dataTable);
+                        connection.Close();
+                        return dataTable;
+                    }
+                }
+            }
+        }
+
+        public double GetCurrentLayawayPrincipal(string transactionId)
+        {
+            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
+            {
+                DataTable dataTable1 = new DataTable();
+                Dictionary<DateTime, double> dictionary1 = new Dictionary<DateTime, double>();
+                KeyValuePair<DateTime, double> maxPaymentDate = new KeyValuePair<DateTime, double>();
+                DateTime transactionDate;
+                double currentPrincipal;
+                double currentPrincipalAmount = 0;
+
+                connection.Open();
+
+                string query1 = @"SELECT
+                                    lp.PaymentDate,
+									lp.NewPrincipal
+							    FROM 
+                                    LayawayPayments lp
+								WHERE 
+                                    lp.TransactionID = @transactionID";
+                using (SqlCeCommand command = new SqlCeCommand(query1, connection))
+                {
+                    command.Parameters.AddWithValue("@transactionID", transactionId);
+
+                    using (SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(command))
+                    {
+                        dataAdapter.Fill(dataTable1);
+                        connection.Close();
+
+                        if (dataTable1.Rows.Count > 0)
+                        {
+                            for (int i = 0; i < dataTable1.Rows.Count; i++)
+                            {
+                                transactionDate = Convert.ToDateTime(dataTable1.Rows[i]["PaymentDate"]);
+                                currentPrincipal = Convert.ToDouble(dataTable1.Rows[i]["NewPrincipal"]);
+                                dictionary1.Add(transactionDate, currentPrincipal);
+                            }
+
+                            foreach (var kvp in dictionary1)
+                            {
+                                if (kvp.Key > maxPaymentDate.Key)
+                                {
+                                    maxPaymentDate = kvp;
+                                }
+                            }
+
+                            currentPrincipalAmount = maxPaymentDate.Value;
+
+                        }
+                        else
+                        {
+                            currentPrincipalAmount = CurrentLayawayPrincipal(transactionId);
+                        }
+                    }
+                }
+
+
+                return currentPrincipalAmount;
+            }
+        }
+
+        public double CurrentLayawayPrincipal(string transactionId)
+        {
+            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
+            {
+                DataTable dataTable = new DataTable();
+                double currentPrincipal = 0;
+
+                connection.Open();
+
+                string query1 = @"SELECT
+                                    l.OwedAmount
+							    FROM 
+                                    Layaway l
+								WHERE 
+                                    l.TransactionID = @transactionID";
+                using (SqlCeCommand command = new SqlCeCommand(query1, connection))
+                {
+                    command.Parameters.AddWithValue("@transactionID", transactionId);
+
+                    using (SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(command))
+                    {
+                        dataAdapter.Fill(dataTable);
+                        connection.Close();
+
+                        if (dataTable.Rows.Count > 0)
+                        {
+                            for (int i = 0; i < dataTable.Rows.Count; i++)
+                            {
+                                currentPrincipal = Convert.ToDouble(dataTable.Rows[i]["OwedAmount"]);
+                            }
+                        }
+                    }
+                }
+
+                return currentPrincipal;
+            }
+        }
+
+        public DataTable GetLayawayPaymentHistory(string transactionID)
+        {
+            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"SELECT
+                                   lp.PaymentDate,
+                                   lp.PaymentAmount
+                                 FROM 
+                                   LayawayPayments lp
+                                 WHERE
+                                   lp.TransactionID = @transactionID";
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@transactionID", transactionID);
+
+                    using (SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(command))
+                    {
+                        DataTable dataTable = new DataTable();
+                        dataAdapter.Fill(dataTable);
+                        connection.Close();
+                        return dataTable;
+                    }
+                }
+            }
+        }
+
+        public void InsertNewLayawayPayment(string transactionID, string paymentDate, string paymentAmount,
+                                       string newPrincipal)
+        {
+            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
+            {
+                connection.Open();
+
+                string insertNewPaymentQuery = @"INSERT INTO LayawayPayments VALUES(@transactionID,@paymentDate,
+                                                 @paymentAmount,@newPrincipal)";
+                using (SqlCeCommand command = new SqlCeCommand(insertNewPaymentQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@transactionID", transactionID);
+                    command.Parameters.AddWithValue("@paymentDate", paymentDate);
+                    command.Parameters.AddWithValue("@paymentAmount", paymentAmount);
+                    command.Parameters.AddWithValue("@newPrincipal", newPrincipal);
+
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+        }
+
+        public void UpdateLayawayToClosed(string transactionID)
+        {
+            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
+            {
+                connection.Open();
+
+                string updateToDefault = @"Update Layaway
+											SET Status = 'Closed'
+											WHERE TransactionID = @transactionID";
+                using (SqlCeCommand command = new SqlCeCommand(updateToDefault, connection))
+                {
+                    command.Parameters.AddWithValue("@transactionID", transactionID);
+
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+        }
+
+        public void UpdateLayawayStatus(string transactionID)
+        {
+            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
+            {
+                connection.Open();
+
+                string updateToDefault = @"Update Inventory
+											SET Status = 'Sold'
+											WHERE TransactionID = @transactionID";
+                using (SqlCeCommand command = new SqlCeCommand(updateToDefault, connection))
+                {
+                    command.Parameters.AddWithValue("@transactionID", transactionID);
+
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+        }
+
+        public void UpdateLayawaySoldDate(string transactionID, DateTime saleDate)
+        {
+            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
+            {
+                connection.Open();
+
+                string updateToDefault = @"Update Inventory
+											SET SaleDate = @saleDate
+											WHERE TransactionID = @transactionID";
+                using (SqlCeCommand command = new SqlCeCommand(updateToDefault, connection))
+                {
+                    command.Parameters.AddWithValue("@transactionID", transactionID);
+                    command.Parameters.AddWithValue("@saleDate", saleDate);
+
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+        }
+
+        #endregion
     }
 }

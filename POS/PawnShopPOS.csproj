@@ -133,6 +133,18 @@
     <Compile Include="DefaultPawnReport.Designer.cs">
       <DependentUpon>DefaultPawnReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="LayawayPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LayawayPayment.Designer.cs">
+      <DependentUpon>LayawayPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LayawayPaymentReceipt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LayawayPaymentReceipt.Designer.cs">
+      <DependentUpon>LayawayPaymentReceipt.cs</DependentUpon>
+    </Compile>
     <Compile Include="LayawayReceipt.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -240,6 +252,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DefaultPawnReport.resx">
       <DependentUpon>DefaultPawnReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LayawayPayment.resx">
+      <DependentUpon>LayawayPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LayawayPaymentReceipt.resx">
+      <DependentUpon>LayawayPaymentReceipt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LayawayReceipt.resx">
       <DependentUpon>LayawayReceipt.cs</DependentUpon>

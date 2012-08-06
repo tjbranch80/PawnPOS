@@ -56,6 +56,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.CreateLayawayButton = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
+            this.LayawayPaymentButton = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -105,7 +107,7 @@
             // ExitButton
             // 
             this.ExitButton.BackColor = System.Drawing.Color.Gainsboro;
-            this.ExitButton.Location = new System.Drawing.Point(400, 385);
+            this.ExitButton.Location = new System.Drawing.Point(400, 421);
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Size = new System.Drawing.Size(80, 48);
             this.ExitButton.TabIndex = 9;
@@ -264,7 +266,7 @@
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 439);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 475);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(495, 33);
             this.pictureBox1.TabIndex = 19;
@@ -337,14 +339,35 @@
             this.label11.TabIndex = 24;
             this.label11.Text = "Create a Layaway";
             // 
+            // LayawayPaymentButton
+            // 
+            this.LayawayPaymentButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("LayawayPaymentButton.BackgroundImage")));
+            this.LayawayPaymentButton.Location = new System.Drawing.Point(334, 320);
+            this.LayawayPaymentButton.Name = "LayawayPaymentButton";
+            this.LayawayPaymentButton.Size = new System.Drawing.Size(56, 56);
+            this.LayawayPaymentButton.TabIndex = 25;
+            this.LayawayPaymentButton.UseVisualStyleBackColor = true;
+            this.LayawayPaymentButton.Click += new System.EventHandler(this.LayawayPaymentButton_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(305, 379);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(127, 13);
+            this.label12.TabIndex = 26;
+            this.label12.Text = "Create Layaway Payment";
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(492, 471);
+            this.ClientSize = new System.Drawing.Size(492, 511);
             this.ControlBox = false;
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.LayawayPaymentButton);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.CreateLayawayButton);
             this.Controls.Add(this.label10);
@@ -411,6 +434,8 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button CreateLayawayButton;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button LayawayPaymentButton;
+        private System.Windows.Forms.Label label12;
     }
 }
 
