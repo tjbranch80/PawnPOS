@@ -1224,6 +1224,65 @@ namespace POS
             }
         }
 
+        public Dictionary<string, DateTime> GetAllLayawayData()
+        {
+            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"SELECT
+								    l.TransactionID,
+                                    l.DefaultDate
+								FROM 
+                                    Layaway l
+								WHERE 
+                                    l.Status = 'Open'";
+
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
+                {
+                    using (SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(command))
+                    {
+                        DataTable dataTable = new DataTable();
+                        Dictionary<string, DateTime> dictionary = new Dictionary<string, DateTime>();
+                        dataAdapter.Fill(dataTable);
+                        connection.Close();
+                        string pawnId = string.Empty;
+                        DateTime defaultDate = Convert.ToDateTime("1/1/1900");
+
+                        for (int i = 0; i < dataTable.Rows.Count; i++)
+                        {
+                            pawnId = dataTable.Rows[i]["TransactionID"].ToString();
+                            defaultDate = Convert.ToDateTime(dataTable.Rows[i]["DefaultDate"]);
+                            dictionary.Add(pawnId, defaultDate);
+                        }
+
+                        return dictionary;
+                    }
+                }
+            }
+        }
+
+        public void UpdateLayawayToDefault(string transactionID, string defaultedDate)
+        {
+            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"Update Layaway
+								 SET Status = 'Default',
+                                 DateDefaulted = @defaultedDate
+								 WHERE TransactionID = @transactionID";
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@transactionID", transactionID);
+                    command.Parameters.AddWithValue("@defaultedDate", defaultedDate);
+
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+        }
+
         #endregion
 
         #region Create a Pawn Payment

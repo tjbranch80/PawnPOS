@@ -311,8 +311,8 @@
   <data name="CreateSaleButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAYAAACohjseAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAK/AAA
-        CvwBmdu77wAAD2xJREFUaEPtWntczXcfP+d0Sktyp0epzul+WW7JnsUwc0uM0TOPzTyhba9ha8Y0UYi5
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAK+wAA
+        CvsBy58dkAAAD2xJREFUaEPtWntczXcfP+d0Sktyp0epzul+WW7JnsUwc0uM0TOPzTyhba9ha8Y0UYi5
         PRJlXVW6328UpXSlRCShWMOwiLkkQurzvD+/ycPGhnN6/nhezuv1fZ1edc7383t/P5f3+/P5JhK9fj3/
         BK5cufI/O57QbNIMy6a+ETmk1q5Gb968qX/79u2Nd+7cOdHQ0HC1rq4uv7q6+pPy8nKV9jAcvIf0v/Ki
         uBlLqWnigpbWifMbGz5aciPJM+hBf6Xb+/XXX6cAWGNrayvxi98bGxvpwoULBIA5ubm5nZVp1DeVrKa7
@@ -505,8 +505,8 @@
   <data name="MaintButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAIAAAAn5KxJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAOsQAA
-        DrEBnIwf2gAAEU9JREFUaEO9mgtUlWW6x9lcpTRHVxnauNQRrzlrrCzrqGWrkxUXLbVZq2k1YzNjmnVO
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAOrwAA
+        Dq8BcRFD7gAAEU9JREFUaEO9mgtUlWW6x9lcpTRHVxnauNQRrzlrrCzrqGWrkxUXLbVZq2k1YzNjmnVO
         Ry1FtAS0Y6WpKSoXuV+8chEU2IAIghsQkKuAXOR+3Zs7e7MvbJgfvDM4IgiYa75ce22+/X3f+3//z//5
         P8/7fkl6e3sN/oMHw0kkEj45enp6GJk/xefAl6HhiHv+YwfgdDqdSqVqaWmpra2tqqqqrq6uq6trbm7u
         7OzUarVcMCQYAzGz7u5u7tf0H1yt7z8eL3oxSldXV2NjY0ZGRmJi4s2bN/Py8oqLi0tLS+/evVteXg5i
@@ -1146,6 +1146,21 @@
     <value>17, 17</value>
   </metadata>
   <data name="ToolReportButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAgxJREFUOE+lkvtL
+        U2EYx+0PEbtpFwnBKPGKiJImGP0gYhIYs1E5GF5gIxkpA00JRSmMEF0ohMh+GaRWYlqabMVcNdS2QpaI
+        VqiDIYhk397vA6fXhCjyhYdzeM/5fp7vczkAdeL2cwho7v/wWzT1zcN+Pwhr51uY2/y41PQaF+wzKKiZ
+        QvaN58g0jyLd5KEUcQbg+84P/Cm2tncQjW3j68YWIqubCC3FcOJc478BAuGoZM6zvoRnakXEruEIjhc4
+        /g5gZop9c+voGAyLbQIfeBZxLL9BA1jzXvuGbWamuKh+GmmVbswE19A59FEBbmoAG7YbsLtm2mZmiml9
+        cvabNDwpz6YB7LYBoMXCumkJr7LOmnnHzBQ/9X2Bo2cOibm1GsBREbAQiYmw/8lnuCeWkVzcgnZlnw1j
+        3HV/wuNXK6i/9x5Hc6wawDlTXHbLJ+LZUBQPRyKwdQdxutwl1h+NLXHh5Ht1ewBHsiwawCW57HyDAfWR
+        dvl0uhZQ1eqX8aVc7EKLqrum651ATLf9OJx5XQM4KmY0xPzZ0hFAiQJnXB0WwME0E3IsL5B17ZlADqWb
+        NYDrOepdlcysmTWWOrxqbceRWtaLk0VO1XW72D5Vckd2gMBfq8zdpmUG62NJvKM4+XyziDk24xmfWoGE
+        s1c0gHPmbrPTpHNJKOCo2G1mZs20zcwUJ5yp1AB5+8/zEwgF5GMVDxh4AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="ToolsButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAgxJREFUOE+lkvtL

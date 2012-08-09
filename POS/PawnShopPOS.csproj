@@ -123,6 +123,12 @@
     <Compile Include="CustomerSearch.Designer.cs">
       <DependentUpon>CustomerSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataBackUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataBackUp.Designer.cs">
+      <DependentUpon>DataBackUp.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataManager.cs" />
     <Compile Include="DataVerification.cs">
       <SubType>UserControl</SubType>
@@ -249,6 +255,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomerSearch.resx">
       <DependentUpon>CustomerSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataBackUp.resx">
+      <DependentUpon>DataBackUp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DefaultPawnReport.resx">
       <DependentUpon>DefaultPawnReport.cs</DependentUpon>

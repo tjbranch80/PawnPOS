@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Windows.Forms;
 
 namespace POS
@@ -204,8 +205,46 @@ namespace POS
             }
         }
 
+        private void CheckForUpdatesButton_Click(object sender, EventArgs e)
+        {
+            //DownLoadTestFile();
+        }
+
+        private void BackUpDatabaseButton_Click(object sender, EventArgs e)
+        {
+            DataBackUp dataBackUp = null;
+            if (dataBackUp != null)
+            {
+                dataBackUp.Activate();
+            }
+            else
+            {
+                dataBackUp = new DataBackUp();
+                dataBackUp.Show();
+            }
+        }
+
         #endregion
 
-        
+        #region Public Methods
+
+        //public void DownLoadTestFile()
+        //{
+        //    WebClient client = new WebClient();
+        //    try
+        //    {
+        //        client.DownloadFile("http://www.rapidshare.com/files/30168760/RapidShare_EN.txt", @"C:\");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(string.Format("Error: {0}", ex.Message));
+        //    }
+        //}
+
+        #endregion
+
+
+
+
     }
 }

@@ -47,6 +47,7 @@ namespace POS
         List<string> defaultedPawnList = new List<string>();
         List<string> paymentTransactionIdList = new List<string>();
         List<string> allTypesTransactionIdList = new List<string>();
+        Dictionary<string, DateTime> allLayawayDataDictionary = new Dictionary<string, DateTime>();
         
         #endregion
 
@@ -67,6 +68,8 @@ namespace POS
                 CheckMaxDate();
                 GetAllPawnData();
                 CheckPawnDefaultDate();
+                GetAllLayawayData();
+                CheckLayawayDefaultDate();
                 ShowProcessCompleted();
             }
             catch(Exception ex)
@@ -335,6 +338,45 @@ namespace POS
             string dateDefaulted = DateTime.Today.ToShortDateString();
 
             dataManager.UpdatePawnToDefault(pawnID, dateDefaulted);	
+        }
+
+        #endregion
+
+        #region Check If A Layaway Is Defaulted
+
+        public void GetAllLayawayData()
+        {
+            DataManager dataManager = new DataManager(connectionString);
+            allLayawayDataDictionary = dataManager.GetAllLayawayData();
+        }
+
+        public void CheckLayawayDefaultDate()
+        {
+            if (allLayawayDataDictionary.Count > 0)
+            {
+                foreach (KeyValuePair<string, DateTime> pawn in allLayawayDataDictionary)
+                {
+                    DateTime defaultDate = pawn.Value;
+                    DateTime today = DateTime.Today;
+                    TimeSpan diffDays = today - defaultDate;
+                    double defaultTest = diffDays.TotalDays;
+                    string pawnID = pawn.Key;
+
+                    if (defaultTest >= 0)
+                    {
+                        SetLayawayToDefault(pawnID);
+                    }
+                }
+            }
+        }
+
+        public void SetLayawayToDefault(string pawnID)
+        {
+            DataManager dataManager = new DataManager(connectionString);
+
+            string dateDefaulted = DateTime.Today.ToShortDateString();
+
+            dataManager.UpdateLayawayToDefault(pawnID, dateDefaulted);
         }
 
         #endregion
