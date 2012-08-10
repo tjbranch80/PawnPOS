@@ -207,7 +207,16 @@ namespace POS
 
         private void CheckForUpdatesButton_Click(object sender, EventArgs e)
         {
-            //DownLoadTestFile();
+            UpdateCheck updateCheck = null;
+            if (updateCheck != null)
+            {
+                updateCheck.Activate();
+            }
+            else
+            {
+                updateCheck = new UpdateCheck();
+                updateCheck.Show();
+            } 
         }
 
         private void BackUpDatabaseButton_Click(object sender, EventArgs e)
@@ -225,26 +234,5 @@ namespace POS
         }
 
         #endregion
-
-        #region Public Methods
-
-        //public void DownLoadTestFile()
-        //{
-        //    WebClient client = new WebClient();
-        //    try
-        //    {
-        //        client.DownloadFile("http://www.rapidshare.com/files/30168760/RapidShare_EN.txt", @"C:\");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(string.Format("Error: {0}", ex.Message));
-        //    }
-        //}
-
-        #endregion
-
-
-
-
     }
 }

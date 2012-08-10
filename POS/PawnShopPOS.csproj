@@ -232,6 +232,12 @@
     <Compile Include="SalesInvoice.Designer.cs">
       <DependentUpon>SalesInvoice.cs</DependentUpon>
     </Compile>
+    <Compile Include="UpdateCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateCheck.Designer.cs">
+      <DependentUpon>UpdateCheck.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AddInventory.resx">
       <DependentUpon>AddInventory.cs</DependentUpon>
     </EmbeddedResource>
@@ -315,6 +321,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SalesInvoice.resx">
       <DependentUpon>SalesInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateCheck.resx">
+      <DependentUpon>UpdateCheck.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config">
       <SubType>Designer</SubType>
