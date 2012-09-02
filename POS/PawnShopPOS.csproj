@@ -133,6 +133,12 @@
     <Compile Include="DataVerification.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="DefaultLayawayReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DefaultLayawayReport.Designer.cs">
+      <DependentUpon>DefaultLayawayReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="DefaultPawnReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -264,6 +270,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataBackUp.resx">
       <DependentUpon>DataBackUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DefaultLayawayReport.resx">
+      <DependentUpon>DefaultLayawayReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DefaultPawnReport.resx">
       <DependentUpon>DefaultPawnReport.cs</DependentUpon>

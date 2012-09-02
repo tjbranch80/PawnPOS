@@ -106,6 +106,20 @@ namespace POS
                 report.Show();
             }
         }
+
+        private void LayawayReportButton_Click(object sender, EventArgs e)
+        {
+            DefaultLayawayReport report = null;
+            if (report != null)
+            {
+                report.Activate();
+            }
+            else
+            {
+                report = new DefaultLayawayReport();
+                report.Show();
+            }
+        }
 		
         #endregion
 		

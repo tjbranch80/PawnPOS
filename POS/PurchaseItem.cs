@@ -124,6 +124,8 @@ namespace POS
             
             try
             {
+                SaveInventoryItem();
+                SavePurchaseItem();
                 CreatePurchaseInvoice();
             }
             catch (Exception ex)
@@ -216,10 +218,6 @@ namespace POS
 			purchaseItemTable.Rows.Add(productID,productDesc,purchasePrice);
 			PurchaseGridView.DataSource = purchaseItemTable;
 			PurchaseGridView.Refresh();
-			
-			SaveInventoryItem();
-			SavePurchaseItem();
-			ResetForm();
 		}
 		
 		public string CreatePONumber()
@@ -268,21 +266,12 @@ namespace POS
 		public void CreatePurchaseInvoice()
 		{
 			string customerID = CustomerIDTextBox.Text;
-			string productID = ProductIDTextBox.Text;
-			
+            string poNum = createPONumber;
+          
 			PurchaseInvoice purchaseInvoice = new PurchaseInvoice();
 			purchaseInvoice.CustomerIDValue = customerID;
-			purchaseInvoice.PONumber = createPONumber;
+			purchaseInvoice.PONumber = poNum;
 			purchaseInvoice.Show();
-		}
-		
-		public void ResetForm()
-		{
-			CustomerIDTextBox.Text = string.Empty;
-			ProductIDTextBox.Text = string.Empty;
-			ProductDescTextBox.Text = string.Empty;
-			PriceTextBox.Text = string.Empty;
-			SerialNumberTextBox.Text = string.Empty;
 		}
 		
 		public string GetDate()

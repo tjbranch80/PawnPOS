@@ -10,7 +10,6 @@ namespace POS
 {
     internal class ReportDataManager
     {
-    
         #region Global Components
 
         string connectionString;
@@ -21,7 +20,6 @@ namespace POS
         }
 
         #endregion
-
 
         #region Report Method Queries
 
@@ -46,6 +44,32 @@ namespace POS
                         dataAdapter.Fill(defaultPawnData);
                         connection.Close();
                         return defaultPawnData;
+                    }
+                }
+            }
+        }
+
+        public DataTable DefaultLayawayReport(DateTime date)
+        {
+            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
+            {
+                connection.Open();
+                string query = @"SELECT * 
+                                 FROM Layaway L
+                                 WHERE L.Status = 'Default'
+                                 AND L.DateDefaulted = @date";
+
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@date", date);
+
+
+                    using (SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(command))
+                    {
+                        DataTable dataTable = new DataTable();
+                        dataAdapter.Fill(dataTable);
+                        connection.Close();
+                        return dataTable;
                     }
                 }
             }

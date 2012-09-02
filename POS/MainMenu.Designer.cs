@@ -52,15 +52,17 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.ToolReportButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.ToolDefaultPawnReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.DefaultLayawayReportButton = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolsButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.CheckForUpdatesButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.BackUpDatabaseButton = new System.Windows.Forms.ToolStripMenuItem();
             this.PawnPaymentButton = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.CreateLayawayButton = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.LayawayPaymentButton = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
-            this.BackUpDatabaseButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.VersionLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -290,7 +292,8 @@
             // 
             this.ToolReportButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.ToolReportButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolDefaultPawnReport});
+            this.ToolDefaultPawnReport,
+            this.DefaultLayawayReportButton});
             this.ToolReportButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolReportButton.Image")));
             this.ToolReportButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ToolReportButton.Name = "ToolReportButton";
@@ -300,9 +303,16 @@
             // ToolDefaultPawnReport
             // 
             this.ToolDefaultPawnReport.Name = "ToolDefaultPawnReport";
-            this.ToolDefaultPawnReport.Size = new System.Drawing.Size(185, 22);
+            this.ToolDefaultPawnReport.Size = new System.Drawing.Size(202, 22);
             this.ToolDefaultPawnReport.Text = "Default Pawn Report";
             this.ToolDefaultPawnReport.Click += new System.EventHandler(this.ToolDefaultPawnReport_Click);
+            // 
+            // DefaultLayawayReportButton
+            // 
+            this.DefaultLayawayReportButton.Name = "DefaultLayawayReportButton";
+            this.DefaultLayawayReportButton.Size = new System.Drawing.Size(202, 22);
+            this.DefaultLayawayReportButton.Text = "Default Layaway Report";
+            this.DefaultLayawayReportButton.Click += new System.EventHandler(this.DefaultLayawayReportButton_Click);
             // 
             // ToolsButton
             // 
@@ -322,6 +332,13 @@
             this.CheckForUpdatesButton.Size = new System.Drawing.Size(176, 22);
             this.CheckForUpdatesButton.Text = "Check For Updates";
             this.CheckForUpdatesButton.Click += new System.EventHandler(this.CheckForUpdatesButton_Click);
+            // 
+            // BackUpDatabaseButton
+            // 
+            this.BackUpDatabaseButton.Name = "BackUpDatabaseButton";
+            this.BackUpDatabaseButton.Size = new System.Drawing.Size(176, 22);
+            this.BackUpDatabaseButton.Text = "Back Up Database";
+            this.BackUpDatabaseButton.Click += new System.EventHandler(this.BackUpDatabaseButton_Click);
             // 
             // PawnPaymentButton
             // 
@@ -381,12 +398,14 @@
             this.label12.TabIndex = 26;
             this.label12.Text = "Create Layaway Payment";
             // 
-            // BackUpDatabaseButton
+            // VersionLabel
             // 
-            this.BackUpDatabaseButton.Name = "BackUpDatabaseButton";
-            this.BackUpDatabaseButton.Size = new System.Drawing.Size(176, 22);
-            this.BackUpDatabaseButton.Text = "Back Up Database";
-            this.BackUpDatabaseButton.Click += new System.EventHandler(this.BackUpDatabaseButton_Click);
+            this.VersionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.VersionLabel.Location = new System.Drawing.Point(12, 446);
+            this.VersionLabel.Name = "VersionLabel";
+            this.VersionLabel.Size = new System.Drawing.Size(159, 23);
+            this.VersionLabel.TabIndex = 27;
+            this.VersionLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // MainMenu
             // 
@@ -396,6 +415,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(492, 511);
             this.ControlBox = false;
+            this.Controls.Add(this.VersionLabel);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.LayawayPaymentButton);
             this.Controls.Add(this.label11);
@@ -427,6 +447,7 @@
             this.MinimizeBox = false;
             this.Name = "MainMenu";
             this.Text = "Pawn Shop POS";
+            this.Load += new System.EventHandler(this.MainMenu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -469,6 +490,8 @@
         private System.Windows.Forms.ToolStripDropDownButton ToolsButton;
         private System.Windows.Forms.ToolStripMenuItem CheckForUpdatesButton;
         private System.Windows.Forms.ToolStripMenuItem BackUpDatabaseButton;
+        private System.Windows.Forms.Label VersionLabel;
+        private System.Windows.Forms.ToolStripMenuItem DefaultLayawayReportButton;
     }
 }
 

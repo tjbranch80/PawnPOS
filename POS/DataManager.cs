@@ -652,19 +652,24 @@ namespace POS
             {
                 connection.Open();
 
-                string purchaseInfoQuery = @"SELECT * 
-                                             FROM Purchase p
-                                             WHERE p.PONumber = @poNumber";
-                using (SqlCeCommand command = new SqlCeCommand(purchaseInfoQuery, connection))
+                string query = @"SELECT
+                                    p.PONumber,
+                                    p.ProductDescription,
+                                    p.PurchasePrice
+                                 FROM 
+                                    Purchase p
+                                 WHERE 
+                                    p.PONumber = @poNumber";
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@poNumber", poNumber);
 
                     using (SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(command))
                     {
-                        DataTable purchaseInfoTable = new DataTable();
-                        dataAdapter.Fill(purchaseInfoTable);
+                        DataTable dataTable = new DataTable();
+                        dataAdapter.Fill(dataTable);
                         connection.Close();
-                        return purchaseInfoTable;
+                        return dataTable;
                     }
                 }
             }

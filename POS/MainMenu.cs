@@ -18,6 +18,13 @@ namespace POS
 
         #region Private Methods\Events
 
+        private void MainMenu_Load(object sender, EventArgs e)
+        {
+            string title = "Version: ";
+            Version currentVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            VersionLabel.Text = string.Format("{0}{1}", title, currentVersion.ToString());
+        }
+
         private void AddCustomerButton_Click(object sender, EventArgs e)
         {
             CreateNewCustomer createCustomer = null;
@@ -159,6 +166,20 @@ namespace POS
             else
             {
                 defaultPawnReport = new DefaultPawnReport();
+                defaultPawnReport.Show();
+            }
+        }
+
+        private void DefaultLayawayReportButton_Click(object sender, EventArgs e)
+        {
+            DefaultLayawayReport defaultPawnReport = null;
+            if (defaultPawnReport != null)
+            {
+                defaultPawnReport.Activate();
+            }
+            else
+            {
+                defaultPawnReport = new DefaultLayawayReport();
                 defaultPawnReport.Show();
             }
         }

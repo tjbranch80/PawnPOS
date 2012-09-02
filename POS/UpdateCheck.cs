@@ -22,7 +22,7 @@ namespace POS
 
         Version newVersion = null;
         string websiteURL = string.Empty;
-        string xmlURL = @"C:\Test.xml";
+        string xmlURL = "http://www.branchsoftwareupdate.zxq.net/GIJOE/PawnPOSS.xml";
         XmlTextReader xmlReader;
         string elementName = string.Empty;
         Version currentVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
@@ -42,7 +42,18 @@ namespace POS
 
         private void YesButton_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(websiteURL);
+            try
+            {
+                System.Diagnostics.Process.Start(websiteURL);
+                StatusLabel.Text = "Update Has Been Downloaded";
+                NoButton.Text = "Close";
+                NoButton.Enabled = true;
+                YesButton.Enabled = false;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Update Could Not Be Found");
+            }
         }
 
         private void NoButton_Click(object sender, EventArgs e)
