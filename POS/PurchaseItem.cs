@@ -35,8 +35,7 @@ namespace POS
 		DataTable customerInfoTable = new DataTable();
 		DataTable SecCatTable = new DataTable();
 		DataTable PrimeCatTable = new DataTable();
-		
-		string createPONumber;
+		string poNumber = string.Empty;
 		
 		#endregion
 		
@@ -62,6 +61,7 @@ namespace POS
 		{
             try
             {
+                poNumber = "PR" + CreatePONumber();
                 GetCustomerData();
                 CheckAccountStatus();
                 GetPrimeCategories();
@@ -69,7 +69,6 @@ namespace POS
                 purchaseItemTable.Columns.Add("Product ID");
                 purchaseItemTable.Columns.Add("Product Description");
                 purchaseItemTable.Columns.Add("Purchase Price");
-                createPONumber = "P" + CreatePONumber();
             }
             catch (Exception)
             {
@@ -124,8 +123,6 @@ namespace POS
             
             try
             {
-                SaveInventoryItem();
-                SavePurchaseItem();
                 CreatePurchaseInvoice();
             }
             catch (Exception ex)
@@ -218,6 +215,15 @@ namespace POS
 			purchaseItemTable.Rows.Add(productID,productDesc,purchasePrice);
 			PurchaseGridView.DataSource = purchaseItemTable;
 			PurchaseGridView.Refresh();
+
+            SaveInventoryItem();
+            SavePurchaseItem();
+
+            ProductIDTextBox.Text = string.Empty;
+            ProductDescTextBox.Text = string.Empty;
+            ProductDescTextBox.Text = string.Empty;
+            PriceTextBox.Text = string.Empty;
+            SerialNumberTextBox.Text = string.Empty;
 		}
 		
 		public string CreatePONumber()
@@ -256,7 +262,6 @@ namespace POS
 			string secondaryCategory = GetSelectedSecCategory();
 			string customerID = GetSelectedCustomerID();
 			string purchaseDate = GetDate();
-			string poNumber = "PR" + createPONumber;
 			
 			DataManager dataManager = new DataManager(connectionString);
 			dataManager.InsertPurchaseItem(productID,productDesc,purchasePrice,primeCategory,
@@ -266,11 +271,10 @@ namespace POS
 		public void CreatePurchaseInvoice()
 		{
 			string customerID = CustomerIDTextBox.Text;
-            string poNum = createPONumber;
           
 			PurchaseInvoice purchaseInvoice = new PurchaseInvoice();
 			purchaseInvoice.CustomerIDValue = customerID;
-			purchaseInvoice.PONumber = poNum;
+			purchaseInvoice.PONumber = poNumber;
 			purchaseInvoice.Show();
 		}
 		
