@@ -56,9 +56,11 @@
             this.LayawyReceiptButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.StillOwedLabel = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.CustomerGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.InventoryGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // CustomerGridView
@@ -300,12 +302,23 @@
             this.StillOwedLabel.Size = new System.Drawing.Size(74, 23);
             this.StillOwedLabel.TabIndex = 24;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 610);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(614, 33);
+            this.pictureBox1.TabIndex = 25;
+            this.pictureBox1.TabStop = false;
+            // 
             // CreateLayaway
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(613, 616);
+            this.ClientSize = new System.Drawing.Size(613, 638);
             this.ControlBox = false;
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.StillOwedLabel);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.LayawyReceiptButton);
@@ -337,6 +350,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.CustomerGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.InventoryGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -371,5 +385,6 @@
         private System.Windows.Forms.Button LayawyReceiptButton;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label StillOwedLabel;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

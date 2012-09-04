@@ -31,3 +31,9 @@ C:\Pawn_POS\POS\obj\x86\Debug\POS.PawnReceipt.resources
 C:\Pawn_POS\POS\obj\x86\Debug\POS.PawnPayment.resources
 C:\Pawn_POS\POS\obj\x86\Debug\POS.PawnPaymentReceipt.resources
 C:\Pawn_POS\POS\obj\x86\Debug\POS.CreateLayaway.resources
+C:\Pawn_POS\POS\obj\x86\Debug\POS.LayawayReceipt.resources
+C:\Pawn_POS\POS\obj\x86\Debug\POS.LayawayPayment.resources
+C:\Pawn_POS\POS\obj\x86\Debug\POS.LayawayPaymentReceipt.resources
+C:\Pawn_POS\POS\obj\x86\Debug\POS.DataBackUp.resources
+C:\Pawn_POS\POS\obj\x86\Debug\POS.UpdateCheck.resources
+C:\Pawn_POS\POS\obj\x86\Debug\POS.DefaultLayawayReport.resources

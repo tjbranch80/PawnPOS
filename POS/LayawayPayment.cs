@@ -78,8 +78,6 @@ namespace POS
                 {
                     AddPaymentToTransaction();
                     MessageBox.Show("Payment Was Added Successfully");
-                    UpdateLayawayStatus();
-                    UpdateSaleDate();
                     CreateLayawayPaymentReceipt();
                     ResetForm();
                 }
@@ -166,7 +164,7 @@ namespace POS
             string layawayDate = Convert.ToDateTime(layawayDetailTable.Rows[0]["LayawayDate"]).ToShortDateString();
             LayawayDateLabel.Text = layawayDate;
 
-            principal = Convert.ToDouble(layawayDetailTable.Rows[0]["PrincipalAmount"]);
+            principal = Convert.ToDouble(layawayDetailTable.Rows[0]["OwedAmount"]);
             string principalAmount = string.Format("{0:C}", principal);
             PrincipalAmountLabel.Text = principalAmount;
 
@@ -224,21 +222,6 @@ namespace POS
             PrincipalAmountLabel.Text = string.Empty;
             CurrentPrincipalLabel.Text = string.Empty;
             GetLayawayPaymentData();
-        }
-
-        public void UpdateLayawayStatus()
-        {
-            DataManager dataManager = new DataManager(connectionString);
-            string transactionID = TransIDTextBox.Text;
-            dataManager.UpdateLayawayStatus(transactionID);
-        }
-
-        public void UpdateSaleDate()
-        {
-            DataManager dataManager = new DataManager(connectionString);
-            string transactionID = TransIDTextBox.Text;
-            DateTime saleDate = DateTime.Today;
-            dataManager.UpdateLayawaySoldDate(transactionID, saleDate);
         }
 
         public string GetCustomerID()

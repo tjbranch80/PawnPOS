@@ -1700,6 +1700,26 @@ namespace POS
             }
         }
 
+        public void UpdateLayawaySoldDate(string productID, DateTime saleDate)
+        {
+            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
+            {
+                connection.Open();
+
+                string updateToDefault = @"Update Inventory
+											SET SaleDate = @saleDate
+											WHERE ProductID = @ProductID";
+                using (SqlCeCommand command = new SqlCeCommand(updateToDefault, connection))
+                {
+                    command.Parameters.AddWithValue("@productID", productID);
+                    command.Parameters.AddWithValue("@saleDate", saleDate);
+
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+        }
+
         #endregion
 
         #region Create a Layaway Payment
@@ -1742,7 +1762,7 @@ namespace POS
                                    l.ProductDescription,
                                    l.Status,
                                    l.LayawayDate,
-                                   l.PrincipalAmount
+                                   l.OwedAmount
                                  FROM 
                                    Layaway l
                                  WHERE
@@ -1923,45 +1943,6 @@ namespace POS
                 using (SqlCeCommand command = new SqlCeCommand(updateToDefault, connection))
                 {
                     command.Parameters.AddWithValue("@transactionID", transactionID);
-
-                    command.ExecuteNonQuery();
-                    connection.Close();
-                }
-            }
-        }
-
-        public void UpdateLayawayStatus(string transactionID)
-        {
-            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
-            {
-                connection.Open();
-
-                string updateToDefault = @"Update Inventory
-											SET Status = 'Sold'
-											WHERE TransactionID = @transactionID";
-                using (SqlCeCommand command = new SqlCeCommand(updateToDefault, connection))
-                {
-                    command.Parameters.AddWithValue("@transactionID", transactionID);
-
-                    command.ExecuteNonQuery();
-                    connection.Close();
-                }
-            }
-        }
-
-        public void UpdateLayawaySoldDate(string transactionID, DateTime saleDate)
-        {
-            using (System.Data.SqlServerCe.SqlCeConnection connection = new SqlCeConnection(connectionString))
-            {
-                connection.Open();
-
-                string updateToDefault = @"Update Inventory
-											SET SaleDate = @saleDate
-											WHERE TransactionID = @transactionID";
-                using (SqlCeCommand command = new SqlCeCommand(updateToDefault, connection))
-                {
-                    command.Parameters.AddWithValue("@transactionID", transactionID);
-                    command.Parameters.AddWithValue("@saleDate", saleDate);
 
                     command.ExecuteNonQuery();
                     connection.Close();

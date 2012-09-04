@@ -32,7 +32,7 @@ namespace POS
 		
 		}
 		
-		string createPONumber;
+		string poNumber = string.Empty;
 		DataTable customerInfoTable = new DataTable();
 		
 		#endregion
@@ -46,7 +46,7 @@ namespace POS
                 GetCustomerData();
                 CheckAccountStatus();
                 GetFinanceCharge();
-                createPONumber = "L" + CreatePONumber();
+                poNumber = "PL" + CreatePONumber();
             }
             catch (Exception)
             {
@@ -220,7 +220,7 @@ namespace POS
 			double principal = Convert.ToDouble(PrincipalTextBox.Text);
 			double totalAmount = principal + financeCharge;
 			
-			string transactionID = "P" + createPONumber;
+			string transactionID = poNumber;
 			string customerID = GetSelectedCustomerID();
 			string productDesc = ProductDescTextBox.Text;
 			string principalAmount = totalAmount.ToString();
@@ -260,18 +260,18 @@ namespace POS
 			CustomerIDTextBox.Text = string.Empty;
 			ProductDescTextBox.Text = string.Empty;
 			PrincipalTextBox.Text = string.Empty;
-			createPONumber = string.Empty;
+			poNumber = string.Empty;
 			ChargeLabel.Text = string.Empty;
 			TotalOwedLabel.Text = string.Empty;
 			FilterTextBox.Text = string.Empty;
 			CustomerGridView.DataSource = customerInfoTable;
-			createPONumber = "L" + CreatePONumber();
+			poNumber = "PL" + CreatePONumber();
 		}
 
         public void CreatePawnReceipt()
         {
             string customerId = CustomerIDTextBox.Text;
-            string transactionId = createPONumber;
+            string transactionId = poNumber;
 
             PawnReceipt pawnReceipt = new PawnReceipt();
             pawnReceipt.CustomerIDValue = customerId;

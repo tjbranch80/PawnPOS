@@ -291,6 +291,7 @@ namespace POS
                     layawayDate, customerID, principal.ToString());
 
                     dataManager.UpdateStatusLayaway(pair.Key.ToString());
+                    UpdateSaleDate(productID);
                 }
 
                 LayawayReceipt layawayReceipt = new LayawayReceipt();
@@ -307,6 +308,13 @@ namespace POS
             {
                 MessageBox.Show("Either the customer ID is blank, you did not select a product, or there is no total");
             }
+        }
+
+        public void UpdateSaleDate(string productID)
+        {
+            DataManager dataManager = new DataManager(connectionString);
+            DateTime saleDate = DateTime.Today;
+            dataManager.UpdateLayawaySoldDate(productID, saleDate);
         }
 
         public bool CheckData()
