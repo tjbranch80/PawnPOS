@@ -59,6 +59,7 @@ namespace POS
             this.InvoiceDateLabel = new System.Windows.Forms.Label();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // panel8
@@ -320,6 +321,16 @@ namespace POS
             // 
             this.printDialog.UseEXDialog = true;
             // 
+            // label6
+            // 
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(-1, 617);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(346, 127);
+            this.label6.TabIndex = 71;
+            this.label6.Text = "We Are Not Responsible For Theft Or Fire. Owner Carries No Insurance On Pawned It" +
+                "ems.";
+            // 
             // PurchaseInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -327,6 +338,7 @@ namespace POS
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(604, 746);
             this.ControlBox = false;
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.InvoiceDateLabel);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.PrintButton);
@@ -390,5 +402,6 @@ namespace POS
 		private System.Windows.Forms.Panel TopLine;
 		private System.Windows.Forms.Panel panel6;
 		private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Label label6;
 	}
 }

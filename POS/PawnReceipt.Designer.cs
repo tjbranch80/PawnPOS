@@ -48,6 +48,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label14
@@ -171,7 +172,7 @@
             // 
             this.PrintButton.FlatAppearance.BorderSize = 0;
             this.PrintButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.PrintButton.Location = new System.Drawing.Point(416, 461);
+            this.PrintButton.Location = new System.Drawing.Point(12, 388);
             this.PrintButton.Name = "PrintButton";
             this.PrintButton.Size = new System.Drawing.Size(176, 23);
             this.PrintButton.TabIndex = 57;
@@ -210,6 +211,16 @@
             this.label4.TabIndex = 60;
             this.label4.Text = "Amount Given For Item";
             // 
+            // label5
+            // 
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(12, 591);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(426, 127);
+            this.label5.TabIndex = 71;
+            this.label5.Text = "Pawn Will Default After 90 Days Of No Payment. We Are Not Responsible For Theft O" +
+                "r Fire. Owner Carries No Insurance On Pawned Items.";
+            // 
             // PawnReceipt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -217,6 +228,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(604, 727);
             this.ControlBox = false;
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -263,5 +275,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }

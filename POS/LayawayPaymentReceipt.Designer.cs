@@ -48,6 +48,7 @@
             this.PrintButton = new System.Windows.Forms.Button();
             this.PrintDialog1 = new System.Windows.Forms.PrintDialog();
             this.printDoc = new System.Drawing.Printing.PrintDocument();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label14
@@ -201,7 +202,7 @@
             // 
             this.PrintButton.FlatAppearance.BorderSize = 0;
             this.PrintButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.PrintButton.Location = new System.Drawing.Point(423, 387);
+            this.PrintButton.Location = new System.Drawing.Point(15, 360);
             this.PrintButton.Name = "PrintButton";
             this.PrintButton.Size = new System.Drawing.Size(169, 23);
             this.PrintButton.TabIndex = 69;
@@ -213,6 +214,16 @@
             // 
             this.PrintDialog1.UseEXDialog = true;
             // 
+            // label5
+            // 
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(12, 572);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(426, 127);
+            this.label5.TabIndex = 70;
+            this.label5.Text = "Layaway Will Default After 90 Days. We Are Not Responsible For Theft Or Fire. Own" +
+                "er Carries No Insurance On Pawned Items.";
+            // 
             // LayawayPaymentReceipt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -220,6 +231,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(604, 708);
             this.ControlBox = false;
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.PrintButton);
             this.Controls.Add(this.NewPrincipalLabel);
             this.Controls.Add(this.PaymentAmountLabel);
@@ -266,5 +278,6 @@
         private System.Windows.Forms.Button PrintButton;
         private System.Windows.Forms.PrintDialog PrintDialog1;
         private System.Drawing.Printing.PrintDocument printDoc;
+        private System.Windows.Forms.Label label5;
     }
 }
