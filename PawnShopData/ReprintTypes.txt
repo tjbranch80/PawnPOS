@@ -1,0 +1,6 @@
+Sales Receipt
+Purchase Order
+Pawn Receipt
+Pawn Payment Receipt
+Layaway Receipt
+Layaway Payment Receipt
