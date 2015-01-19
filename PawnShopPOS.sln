@@ -1,7 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-# SharpDevelop 4.2.0.8649-Beta 2
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PawnShopPOS", "POS\PawnShopPOS.csproj", "{39A4D4EE-F77C-4317-BC37-8E65E91157BC}"
 EndProject
 Global

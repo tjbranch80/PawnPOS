@@ -37,3 +37,6 @@ C:\Pawn_POS\POS\obj\x86\Debug\POS.LayawayPaymentReceipt.resources
 C:\Pawn_POS\POS\obj\x86\Debug\POS.DataBackUp.resources
 C:\Pawn_POS\POS\obj\x86\Debug\POS.UpdateCheck.resources
 C:\Pawn_POS\POS\obj\x86\Debug\POS.DefaultLayawayReport.resources
+C:\Documents and Settings\XPMUser\My Documents\Google Drive\GitHub\PawnPOS\POS\bin\Debug\PawnShopPOS.exe.config
+C:\Documents and Settings\XPMUser\My Documents\Google Drive\GitHub\PawnPOS\POS\obj\x86\Debug\PawnShopPOS.exe
+C:\Documents and Settings\XPMUser\My Documents\Google Drive\GitHub\PawnPOS\POS\obj\x86\Debug\PawnShopPOS.pdb
