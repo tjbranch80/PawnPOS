@@ -15,7 +15,8 @@
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <SourceAnalysisOverrideSettingsFile>C:\Documents and Settings\tbranch\Application Data\ICSharpCode/SharpDevelop4\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
-    <ApplicationIcon>..\..\Documents and Settings\tbranch\My Documents\My Pictures\Icons\PawnShopIcons\Red-pawn-Symbol.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <RunCodeAnalysis>False</RunCodeAnalysis>
     <RunSourceAnalysis>False</RunSourceAnalysis>
@@ -55,10 +56,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="RdlEngine">
-      <HintPath>..\..\Program Files\fyiReporting RDL Project 4.1\RdlEngine.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\fyiReporting RDL Project 4.1\RdlEngine.dll</HintPath>
     </Reference>
     <Reference Include="RdlViewer">
-      <HintPath>..\..\Program Files\fyiReporting RDL Project 4.1\RdlViewer.DLL</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\fyiReporting RDL Project 4.1\RdlViewer.DLL</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />

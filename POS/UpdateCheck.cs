@@ -38,7 +38,6 @@ namespace POS
             StatusLabel.Text = "Checking For Updates...";
             GetWebVersion();
             CompareVersions();
-            //test this change
         }
 
         private void YesButton_Click(object sender, EventArgs e)
